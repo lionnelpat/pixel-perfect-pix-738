@@ -133,9 +133,35 @@ export const practical = {
   contact: { name: "Gaelle Magnerou", phone: null as string | null },
 };
 
+export type GiftStore = {
+  name: string;
+  city?: string;
+  address?: string;
+  /** Lien vers la liste en ligne de l'enseigne, s'il existe. */
+  url?: string;
+  aConfirmer?: boolean;
+};
+
 export const registry = {
-  message: null as string | null,
-  url: null as string | null,
+  intro: "Votre présence est le plus précieux des cadeaux. Pour celles et ceux qui souhaitent nous gâter, deux possibilités s’offrent à vous.",
+  /** Les 3 enseignes où trouver la liste — choix en cours par les mariés. */
+  stores: [
+    { name: "Enseigne n°1", aConfirmer: true },
+    { name: "Enseigne n°2", aConfirmer: true },
+    { name: "Enseigne n°3", aConfirmer: true },
+  ] as GiftStore[],
+  voucher: {
+    title: "Le bon cadeau",
+    text: "Vous préférez nous laisser choisir ? Offrez-nous un bon cadeau.",
+    steps: ["Rendez-vous dans l’enseigne de votre choix.", "Faites établir un bon cadeau du montant qui vous convient.", "Remettez-le aux mariés."],
+  },
+};
+
+export const guestbook = {
+  intro: "Un mot doux, un souvenir, un vœu pour notre avenir… Laissez-nous un message, nous le garderons précieusement.",
+  moderationNote: "Votre message sera publié ici après validation par les mariés.",
+  thanks: "Merci pour votre message ! Il apparaîtra ici dès que les mariés l’auront lu.",
+  empty: "Soyez le premier ou la première à nous laisser un mot.",
 };
 
 /** Lien Google Maps : le lien exact s'il est fourni, sinon une recherche sur l'adresse. */

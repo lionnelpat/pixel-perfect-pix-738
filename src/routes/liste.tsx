@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Gift } from "lucide-react";
-import { Divider, PageHeader } from "@/components/site/Ornaments";
+import { ExternalLink, Gift, MapPin, Store, Ticket } from "lucide-react";
+import { Divider, PageHeader, PendingNote } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
 import { registry, storyPhotos } from "@/content/wedding";
 
@@ -20,25 +20,66 @@ function Registry() {
   return (
     <>
       <PageHeader eyebrow="Avec gratitude" title="Liste de mariage" image={storyPhotos[1]} />
-      <div className="px-6 py-20">
-        <Reveal from="zoom" className="card-elegant relative mx-auto max-w-xl overflow-hidden px-8 py-12 text-center">
+      <div className="mx-auto max-w-5xl px-6 py-20">
+        <Reveal from="zoom" className="mx-auto max-w-2xl text-center">
           <span className="animate-heartbeat mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-terracotta shadow-lg shadow-terracotta/30">
             <Gift className="h-8 w-8 text-cream" aria-hidden />
           </span>
-          <p className="mt-6 font-serif text-2xl leading-relaxed">{registry.message ?? "Votre présence est le plus précieux des cadeaux."}</p>
+          <p className="mt-6 font-serif text-2xl leading-relaxed">{registry.intro}</p>
           <Divider className="mt-4" />
-          {registry.url ? (
-            <a
-              href={registry.url}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-6 inline-block rounded-full bg-navy px-8 py-3 text-sm uppercase tracking-widest text-navy-foreground shadow-lg transition hover:-translate-y-0.5 hover:bg-terracotta"
-            >
-              Découvrir la liste
-            </a>
-          ) : (
-            <p className="mt-4 text-sm italic text-muted-foreground">Le lien vers la liste sera partagé très bientôt.</p>
-          )}
+        </Reveal>
+
+        <Reveal className="mt-14 text-center">
+          <p className="text-xs uppercase tracking-[0.4em] text-terracotta">Première possibilité</p>
+          <h2 className="font-script mt-2 text-5xl text-navy">Notre liste en magasin</h2>
+          <p className="mt-3 text-muted-foreground">Retrouvez notre liste dans l’une de ces trois enseignes.</p>
+        </Reveal>
+        <div className="mt-8 grid gap-6 sm:grid-cols-3">
+          {registry.stores.map((s, k) => (
+            <Reveal key={s.name} delay={k * 120}>
+              <article className="card-elegant flex h-full flex-col items-center p-7 text-center transition duration-500 hover:-translate-y-1 hover:shadow-2xl">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-terracotta/10 ring-1 ring-gold/50">
+                  <Store className="h-6 w-6 text-terracotta" aria-hidden />
+                </span>
+                <h3 className="mt-4 text-2xl font-semibold text-navy">{s.name}</h3>
+                {s.city && <p className="mt-1 text-sm text-muted-foreground">{s.city}</p>}
+                {s.address && (
+                  <p className="mt-2 flex items-start gap-1.5 text-sm">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-terracotta" aria-hidden />
+                    {s.address}
+                  </p>
+                )}
+                {s.aConfirmer && <PendingNote>Enseigne bientôt annoncée</PendingNote>}
+                {s.url && (
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-auto inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-navy-foreground shadow-md transition hover:-translate-y-0.5 hover:bg-terracotta"
+                  >
+                    Voir la liste <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                  </a>
+                )}
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal className="mt-20">
+          <section className="relative overflow-hidden rounded-xl bg-navy px-8 py-12 text-center text-navy-foreground shadow-2xl sm:px-14">
+            <Ticket className="mx-auto h-9 w-9 text-gold" aria-hidden />
+            <p className="mt-3 text-xs uppercase tracking-[0.4em] text-gold">Deuxième possibilité</p>
+            <h2 className="font-script text-gold-shimmer mt-2 text-5xl">{registry.voucher.title}</h2>
+            <p className="mt-4 font-serif text-xl italic text-navy-foreground/90">{registry.voucher.text}</p>
+            <ol className="mx-auto mt-8 grid max-w-3xl gap-6 text-left sm:grid-cols-3">
+              {registry.voucher.steps.map((step, k) => (
+                <li key={step} className="flex items-start gap-3 sm:flex-col sm:items-center sm:text-center">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold font-serif text-xl text-gold">{k + 1}</span>
+                  <span className="text-sm leading-relaxed text-navy-foreground/85">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
         </Reveal>
       </div>
     </>

@@ -26,10 +26,17 @@ Les points encore à confirmer avec les mariés sont suivis dans `docs/DECISIONS
 Pour remplacer les photos d'illustration : déposer les fichiers dans `public/photos/`,
 indiquer `src: "/photos/xxx.webp"` et retirer `placeholder`.
 
+## Livre d'or
+
+Les messages sont stockés dans Netlify Blobs (store `livre-dor`) et ne sont publiés qu'après validation sur `/admin`.
+En local (`npm run dev`), ils sont gardés en mémoire et disparaissent au redémarrage.
+
 ## Déploiement (Netlify)
 
 Le site est relié au dépôt GitHub : chaque `git push` redéploie automatiquement.
 
 - Configuration de build : `netlify.toml` (`npm run build`, dossier publié `dist`).
-- Variable d'environnement obligatoire : `SITE_PASSWORD` (Site configuration → Environment variables).
+- Variables d'environnement obligatoires (Site configuration → Environment variables, scope « Functions ») :
+  - `SITE_PASSWORD` : mot de passe des invités ;
+  - `ADMIN_PASSWORD` : mot de passe des mariés pour valider les messages du livre d'or sur `/admin`.
 - Bandeau « version de travail » : `preview.banner` dans `src/content/wedding.ts`.

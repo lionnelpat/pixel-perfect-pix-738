@@ -13,6 +13,7 @@ export const navItems = [
   { to: "/infos", label: "Infos pratiques" },
   { to: "/liste", label: "Liste de mariage" },
   { to: "/galerie", label: "Galerie" },
+  { to: "/livre-dor", label: "Livre d’or" },
 ] as const;
 
 export function SiteNav() {

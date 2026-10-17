@@ -11,12 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccesRouteImport } from './routes/acces'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as DressCodeRouteImport } from './routes/dress-code'
 import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as HistoireRouteImport } from './routes/histoire'
 import { Route as InfosRouteImport } from './routes/infos'
 import { Route as LieuxRouteImport } from './routes/lieux'
 import { Route as ListeRouteImport } from './routes/liste'
+import { Route as LivreDorRouteImport } from './routes/livre-dor'
 import { Route as ProgrammeRouteImport } from './routes/programme'
 
 const IndexRoute = IndexRouteImport.update({
@@ -27,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const AccesRoute = AccesRouteImport.update({
   id: '/acces',
   path: '/acces',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DressCodeRoute = DressCodeRouteImport.update({
@@ -59,6 +66,11 @@ const ListeRoute = ListeRouteImport.update({
   path: '/liste',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LivreDorRoute = LivreDorRouteImport.update({
+  id: '/livre-dor',
+  path: '/livre-dor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgrammeRoute = ProgrammeRouteImport.update({
   id: '/programme',
   path: '/programme',
@@ -68,35 +80,41 @@ const ProgrammeRoute = ProgrammeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/acces': typeof AccesRoute
+  '/admin': typeof AdminRoute
   '/dress-code': typeof DressCodeRoute
   '/galerie': typeof GalerieRoute
   '/histoire': typeof HistoireRoute
   '/infos': typeof InfosRoute
   '/lieux': typeof LieuxRoute
   '/liste': typeof ListeRoute
+  '/livre-dor': typeof LivreDorRoute
   '/programme': typeof ProgrammeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/acces': typeof AccesRoute
+  '/admin': typeof AdminRoute
   '/dress-code': typeof DressCodeRoute
   '/galerie': typeof GalerieRoute
   '/histoire': typeof HistoireRoute
   '/infos': typeof InfosRoute
   '/lieux': typeof LieuxRoute
   '/liste': typeof ListeRoute
+  '/livre-dor': typeof LivreDorRoute
   '/programme': typeof ProgrammeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/acces': typeof AccesRoute
+  '/admin': typeof AdminRoute
   '/dress-code': typeof DressCodeRoute
   '/galerie': typeof GalerieRoute
   '/histoire': typeof HistoireRoute
   '/infos': typeof InfosRoute
   '/lieux': typeof LieuxRoute
   '/liste': typeof ListeRoute
+  '/livre-dor': typeof LivreDorRoute
   '/programme': typeof ProgrammeRoute
 }
 export interface FileRouteTypes {
@@ -104,46 +122,54 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/acces'
+    | '/admin'
     | '/dress-code'
     | '/galerie'
     | '/histoire'
     | '/infos'
     | '/lieux'
     | '/liste'
+    | '/livre-dor'
     | '/programme'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/acces'
+    | '/admin'
     | '/dress-code'
     | '/galerie'
     | '/histoire'
     | '/infos'
     | '/lieux'
     | '/liste'
+    | '/livre-dor'
     | '/programme'
   id:
     | '__root__'
     | '/'
     | '/acces'
+    | '/admin'
     | '/dress-code'
     | '/galerie'
     | '/histoire'
     | '/infos'
     | '/lieux'
     | '/liste'
+    | '/livre-dor'
     | '/programme'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccesRoute: typeof AccesRoute
+  AdminRoute: typeof AdminRoute
   DressCodeRoute: typeof DressCodeRoute
   GalerieRoute: typeof GalerieRoute
   HistoireRoute: typeof HistoireRoute
   InfosRoute: typeof InfosRoute
   LieuxRoute: typeof LieuxRoute
   ListeRoute: typeof ListeRoute
+  LivreDorRoute: typeof LivreDorRoute
   ProgrammeRoute: typeof ProgrammeRoute
 }
 
@@ -161,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/acces'
       fullPath: '/acces'
       preLoaderRoute: typeof AccesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dress-code': {
@@ -205,6 +238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ListeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/livre-dor': {
+      id: '/livre-dor'
+      path: '/livre-dor'
+      fullPath: '/livre-dor'
+      preLoaderRoute: typeof LivreDorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programme': {
       id: '/programme'
       path: '/programme'
@@ -218,12 +258,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccesRoute: AccesRoute,
+  AdminRoute: AdminRoute,
   DressCodeRoute: DressCodeRoute,
   GalerieRoute: GalerieRoute,
   HistoireRoute: HistoireRoute,
   InfosRoute: InfosRoute,
   LieuxRoute: LieuxRoute,
   ListeRoute: ListeRoute,
+  LivreDorRoute: LivreDorRoute,
   ProgrammeRoute: ProgrammeRoute,
 }
 export const routeTree = rootRouteImport
