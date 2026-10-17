@@ -20,7 +20,7 @@ function Story() {
       <PageHeader eyebrow="Il était une fois" title="Notre histoire" />
       <article className="mx-auto max-w-2xl px-6">
         <p className="text-center font-serif text-2xl italic text-terracotta">{story.date}</p>
-        <div className="mt-8 space-y-6 font-serif text-xl leading-relaxed first-letter:float-left">
+        <div className="mt-8 space-y-6 font-serif text-xl leading-relaxed">
           {story.paragraphs.map((p, i) => (
             <p key={i} className={i === 0 ? "first-letter:font-script first-letter:float-left first-letter:mr-2 first-letter:text-7xl first-letter:leading-none first-letter:text-navy" : ""}>
               {p}
