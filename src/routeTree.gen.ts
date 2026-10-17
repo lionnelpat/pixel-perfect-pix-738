@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccesRouteImport } from './routes/acces'
+import { Route as DressCodeRouteImport } from './routes/dress-code'
+import { Route as GalerieRouteImport } from './routes/galerie'
+import { Route as HistoireRouteImport } from './routes/histoire'
+import { Route as InfosRouteImport } from './routes/infos'
+import { Route as LieuxRouteImport } from './routes/lieux'
+import { Route as ListeRouteImport } from './routes/liste'
+import { Route as ProgrammeRouteImport } from './routes/programme'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccesRoute = AccesRouteImport.update({
+  id: '/acces',
+  path: '/acces',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DressCodeRoute = DressCodeRouteImport.update({
+  id: '/dress-code',
+  path: '/dress-code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerieRoute = GalerieRouteImport.update({
+  id: '/galerie',
+  path: '/galerie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoireRoute = HistoireRouteImport.update({
+  id: '/histoire',
+  path: '/histoire',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfosRoute = InfosRouteImport.update({
+  id: '/infos',
+  path: '/infos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LieuxRoute = LieuxRouteImport.update({
+  id: '/lieux',
+  path: '/lieux',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ListeRoute = ListeRouteImport.update({
+  id: '/liste',
+  path: '/liste',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgrammeRoute = ProgrammeRouteImport.update({
+  id: '/programme',
+  path: '/programme',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/acces': typeof AccesRoute
+  '/dress-code': typeof DressCodeRoute
+  '/galerie': typeof GalerieRoute
+  '/histoire': typeof HistoireRoute
+  '/infos': typeof InfosRoute
+  '/lieux': typeof LieuxRoute
+  '/liste': typeof ListeRoute
+  '/programme': typeof ProgrammeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/acces': typeof AccesRoute
+  '/dress-code': typeof DressCodeRoute
+  '/galerie': typeof GalerieRoute
+  '/histoire': typeof HistoireRoute
+  '/infos': typeof InfosRoute
+  '/lieux': typeof LieuxRoute
+  '/liste': typeof ListeRoute
+  '/programme': typeof ProgrammeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/acces': typeof AccesRoute
+  '/dress-code': typeof DressCodeRoute
+  '/galerie': typeof GalerieRoute
+  '/histoire': typeof HistoireRoute
+  '/infos': typeof InfosRoute
+  '/lieux': typeof LieuxRoute
+  '/liste': typeof ListeRoute
+  '/programme': typeof ProgrammeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/acces'
+    | '/dress-code'
+    | '/galerie'
+    | '/histoire'
+    | '/infos'
+    | '/lieux'
+    | '/liste'
+    | '/programme'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/acces'
+    | '/dress-code'
+    | '/galerie'
+    | '/histoire'
+    | '/infos'
+    | '/lieux'
+    | '/liste'
+    | '/programme'
+  id:
+    | '__root__'
+    | '/'
+    | '/acces'
+    | '/dress-code'
+    | '/galerie'
+    | '/histoire'
+    | '/infos'
+    | '/lieux'
+    | '/liste'
+    | '/programme'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccesRoute: typeof AccesRoute
+  DressCodeRoute: typeof DressCodeRoute
+  GalerieRoute: typeof GalerieRoute
+  HistoireRoute: typeof HistoireRoute
+  InfosRoute: typeof InfosRoute
+  LieuxRoute: typeof LieuxRoute
+  ListeRoute: typeof ListeRoute
+  ProgrammeRoute: typeof ProgrammeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/acces': {
+      id: '/acces'
+      path: '/acces'
+      fullPath: '/acces'
+      preLoaderRoute: typeof AccesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dress-code': {
+      id: '/dress-code'
+      path: '/dress-code'
+      fullPath: '/dress-code'
+      preLoaderRoute: typeof DressCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerie': {
+      id: '/galerie'
+      path: '/galerie'
+      fullPath: '/galerie'
+      preLoaderRoute: typeof GalerieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/histoire': {
+      id: '/histoire'
+      path: '/histoire'
+      fullPath: '/histoire'
+      preLoaderRoute: typeof HistoireRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/infos': {
+      id: '/infos'
+      path: '/infos'
+      fullPath: '/infos'
+      preLoaderRoute: typeof InfosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lieux': {
+      id: '/lieux'
+      path: '/lieux'
+      fullPath: '/lieux'
+      preLoaderRoute: typeof LieuxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/liste': {
+      id: '/liste'
+      path: '/liste'
+      fullPath: '/liste'
+      preLoaderRoute: typeof ListeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programme': {
+      id: '/programme'
+      path: '/programme'
+      fullPath: '/programme'
+      preLoaderRoute: typeof ProgrammeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccesRoute: AccesRoute,
+  DressCodeRoute: DressCodeRoute,
+  GalerieRoute: GalerieRoute,
+  HistoireRoute: HistoireRoute,
+  InfosRoute: InfosRoute,
+  LieuxRoute: LieuxRoute,
+  ListeRoute: ListeRoute,
+  ProgrammeRoute: ProgrammeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
