@@ -22,7 +22,7 @@ Tout le contenu se modifie dans `src/content/wedding.ts`.
 - Soirée de gala : faut-il une restriction nominative sur le site ? Actuellement : mention « sur invitation ».
 
 ## Décidé
-- Livre d'or : messages publics après validation par les mariés sur `/admin` (mot de passe `ADMIN_PASSWORD`).
+- Livre d'or : messages publics après validation par les mariés sur `/admin` (mot de passe `ADMIN_PASSWORD`). Aucun message n'est supprimé : on l'archive.
 - Invitations numériques au gala (envoi e-mail/WhatsApp, suivi des confirmations) : abandonné par les mariés (17/10/2026).
 
 ## Non développé (en attente)

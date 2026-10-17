@@ -28,7 +28,7 @@ indiquer `src: "/photos/xxx.webp"` et retirer `placeholder`.
 
 ## Livre d'or
 
-Les messages sont stockés dans Netlify Blobs (store `livre-dor`) et ne sont publiés qu'après validation sur `/admin`.
+Les messages sont stockés dans Netlify Blobs (store `livre-dor`) et ne sont publiés qu'après validation sur `/admin` (statuts : à valider, publié, archivé ; aucune suppression).
 En local (`npm run dev`), ils sont gardés en mémoire et disparaissent au redémarrage.
 
 ## Déploiement (Netlify)

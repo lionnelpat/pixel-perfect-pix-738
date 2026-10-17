@@ -2,17 +2,14 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequestIP } from "@tanstack/react-start/server";
 import { z } from "zod";
 import { ADMIN_GATE, hasAccess, SITE_GATE } from "./access.server";
-import { newestFirst, readAll, readOne, remove, write, type GuestbookEntry } from "./guestbook.server";
+import { newestFirst, readAll, readOne, readPublished, rebuildPublished, write, type GuestbookEntry, type GuestbookStatus, type PublicMessage } from "./guestbook.server";
 
-export type { GuestbookEntry };
+export type { GuestbookEntry, GuestbookStatus, PublicMessage };
 
 /** Messages validés, visibles par les invités. */
 export const listMessages = createServerFn({ method: "GET" }).handler(async () => {
-  if (!(await hasAccess(SITE_GATE))) return [];
-  return (await readAll())
-    .filter((e) => e.approved)
-    .sort(newestFirst)
-    .map(({ id, name, message, createdAt }) => ({ id, name, message, createdAt }));
+  if (!(await hasAccess(SITE_GATE))) return [] as PublicMessage[];
+  return readPublished();
 });
 
 const MAX_POSTS = 3;
@@ -50,22 +47,23 @@ export const postMessage = createServerFn({ method: "POST" })
       name: data.name,
       message: data.message,
       createdAt: new Date(now).toISOString(),
-      approved: false,
+      status: "pending",
     });
     return { ok: true, error: null };
   });
 
-/** Tous les messages, à valider en premier. */
+/** Tous les messages, du plus récent au plus ancien (le tri par statut se fait dans l'interface). */
 export const adminListMessages = createServerFn({ method: "GET" }).handler(async () => {
   if (!(await hasAccess(ADMIN_GATE))) throw new Error("Accès refusé");
-  return (await readAll()).sort((a, b) => Number(a.approved) - Number(b.approved) || newestFirst(a, b));
+  return (await readAll()).sort(newestFirst);
 });
 
 export const moderateMessage = createServerFn({ method: "POST" })
-  .validator((d: unknown) => z.object({ id: z.string().min(1).max(64), action: z.enum(["approve", "hide", "delete"]) }).parse(d))
+  .validator((d: unknown) => z.object({ id: z.string().min(1).max(64), status: z.enum(["pending", "published", "archived"]) }).parse(d))
   .handler(async ({ data }) => {
     if (!(await hasAccess(ADMIN_GATE))) throw new Error("Accès refusé");
-    if (data.action === "delete") return remove(data.id);
     const entry = await readOne(data.id);
-    if (entry) await write({ ...entry, approved: data.action === "approve" });
+    if (!entry || entry.status === data.status) return;
+    await write({ ...entry, status: data.status });
+    await rebuildPublished();
   });

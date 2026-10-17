@@ -2,11 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { Feather, Heart, Send } from "lucide-react";
 import { useState } from "react";
+import { MessageCarousel } from "@/components/site/MessageCarousel";
 import { Divider, PageHeader } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
 import { gallery, guestbook } from "@/content/wedding";
 import { listMessages, postMessage } from "@/lib/guestbook.functions";
-import { formatDate } from "@/lib/utils";
 
 export const Route = createFileRoute("/livre-dor")({
   head: () => ({
@@ -125,25 +125,16 @@ function Guestbook() {
         </Reveal>
 
         <section className="mt-20" aria-label="Messages des invités">
+          <Reveal className="text-center">
+            <p className="text-xs uppercase tracking-[0.4em] text-terracotta">{messages.length > 0 ? `${messages.length} message${messages.length > 1 ? "s" : ""}` : "Vos messages"}</p>
+            <h2 className="font-script mt-2 text-5xl text-navy">Ils nous ont écrit</h2>
+          </Reveal>
           {messages.length === 0 ? (
-            <p className="text-center font-serif text-xl italic text-muted-foreground">{guestbook.empty}</p>
+            <p className="mt-6 text-center font-serif text-xl italic text-muted-foreground">{guestbook.empty}</p>
           ) : (
-            <div className="columns-1 gap-6 sm:columns-2 lg:columns-3">
-              {messages.map((m, k) => (
-                <Reveal key={m.id} delay={(k % 3) * 120} className="mb-6 break-inside-avoid">
-                  <figure className="card-elegant relative p-7">
-                    <span className="font-script absolute -top-2 left-5 text-6xl leading-none text-gold/60" aria-hidden>
-                      “
-                    </span>
-                    <blockquote className="whitespace-pre-line font-serif text-lg leading-relaxed text-foreground/90">{m.message}</blockquote>
-                    <figcaption className="mt-4 border-t border-gold/30 pt-3">
-                      <p className="font-script text-3xl text-terracotta">{m.name}</p>
-                      <p className="text-xs text-muted-foreground">{formatDate(m.createdAt)}</p>
-                    </figcaption>
-                  </figure>
-                </Reveal>
-              ))}
-            </div>
+            <Reveal className="mt-8">
+              <MessageCarousel messages={messages} />
+            </Reveal>
           )}
         </section>
       </div>
