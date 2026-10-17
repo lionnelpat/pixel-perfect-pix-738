@@ -10,33 +10,30 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { checkAccess } from "../lib/access.functions";
-import { SiteFooter, SiteNav } from "../components/site/SiteNav";
+import { PreviewBanner, SiteFooter, SiteNav } from "../components/site/SiteNav";
+import { PageHeader } from "../components/site/Ornaments";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-[60vh] items-center justify-center px-4">
-      <div className="max-w-md text-center">
-        <h1 className="font-script text-6xl text-navy">Oups…</h1>
-        <p className="mt-2 text-muted-foreground">Cette page n’existe pas.</p>
-        <Link to="/" className="mt-6 inline-block rounded-md bg-primary px-5 py-2 text-sm text-primary-foreground">
+    <>
+      <PageHeader eyebrow="Page introuvable" title="Oups…" />
+      <div className="px-4 py-16 text-center">
+        <p className="text-muted-foreground">Cette page n’existe pas.</p>
+        <Link to="/" className="mt-6 inline-block rounded-full bg-primary px-6 py-2.5 text-sm uppercase tracking-widest text-primary-foreground">
           Retour à l’accueil
         </Link>
       </div>
-    </div>
+    </>
   );
 }
 
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="max-w-md text-center">
@@ -113,6 +110,7 @@ function RootComponent() {
         <Outlet />
       </main>
       {!gate && <SiteFooter />}
+      <PreviewBanner />
     </QueryClientProvider>
   );
 }

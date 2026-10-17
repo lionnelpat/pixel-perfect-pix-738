@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { Expand } from "lucide-react";
+import { useState } from "react";
+import { Lightbox } from "@/components/site/Lightbox";
 import { PageHeader } from "@/components/site/Ornaments";
+import { PhotoCarousel } from "@/components/site/PhotoCarousel";
+import { Reveal } from "@/components/site/Reveal";
 import { gallery } from "@/content/wedding";
 
 export const Route = createFileRoute("/galerie")({
@@ -19,47 +22,35 @@ export const Route = createFileRoute("/galerie")({
 function Gallery() {
   const [i, setI] = useState<number | null>(null);
   const n = gallery.length;
-  const move = useCallback((d: number) => setI((c) => (c === null ? c : (c + d + n) % n)), [n]);
-
-  useEffect(() => {
-    if (i === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setI(null);
-      if (e.key === "ArrowRight") move(1);
-      if (e.key === "ArrowLeft") move(-1);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [i, move]);
 
   return (
     <>
-      <PageHeader eyebrow="Souvenirs" title="Galerie" />
+      <PageHeader eyebrow="Souvenirs" title="Galerie" image={gallery[2]} />
       {n === 0 ? (
-        <p className="mx-auto max-w-md px-6 text-center font-serif text-xl italic text-muted-foreground">
+        <p className="mx-auto max-w-md px-6 py-20 text-center font-serif text-xl italic text-muted-foreground">
           Les photos seront partagées ici très bientôt, puis après le mariage.
         </p>
       ) : (
-        <div className="mx-auto max-w-6xl columns-2 gap-3 px-4 sm:columns-3">
-          {gallery.map((p, k) => (
-            <button key={p.src} onClick={() => setI(k)} className="mb-3 block w-full overflow-hidden rounded-md">
-              <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="w-full transition-transform duration-500 hover:scale-105" />
-            </button>
-          ))}
-        </div>
+        <>
+          <section className="py-14">
+            <PhotoCarousel photos={gallery} onOpen={setI} />
+          </section>
+          <div className="mx-auto max-w-6xl columns-2 gap-4 px-4 sm:columns-3">
+            {gallery.map((p, k) => (
+              <Reveal key={p.src + k} delay={(k % 3) * 120} className="mb-4 break-inside-avoid">
+                <button onClick={() => setI(k)} className="group relative block w-full overflow-hidden rounded-lg shadow-lg">
+                  <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="img-zoom w-full" />
+                  <span className="absolute inset-0 flex items-end justify-between bg-gradient-to-t from-navy/80 via-transparent to-transparent p-4 text-left text-navy-foreground opacity-0 transition duration-500 group-hover:opacity-100">
+                    <span className="font-serif text-lg italic">{p.alt}</span>
+                    <Expand className="h-5 w-5 shrink-0 text-gold" aria-hidden />
+                  </span>
+                </button>
+              </Reveal>
+            ))}
+          </div>
+        </>
       )}
-      {i !== null && gallery[i] && (
-        <div role="dialog" aria-modal="true" aria-label={gallery[i]!.alt} className="fixed inset-0 z-50 flex items-center justify-center bg-navy/95 p-4" onClick={() => setI(null)}>
-          <img src={gallery[i]!.src} alt={gallery[i]!.alt} className="max-h-[85vh] max-w-full rounded" onClick={(e) => e.stopPropagation()} />
-          <button aria-label="Fermer" className="absolute right-4 top-4 text-navy-foreground" onClick={() => setI(null)}><X /></button>
-          {n > 1 && (
-            <>
-              <button aria-label="Précédente" className="absolute left-2 text-navy-foreground" onClick={(e) => { e.stopPropagation(); move(-1); }}><ChevronLeft className="h-8 w-8" /></button>
-              <button aria-label="Suivante" className="absolute right-2 text-navy-foreground" onClick={(e) => { e.stopPropagation(); move(1); }}><ChevronRight className="h-8 w-8" /></button>
-            </>
-          )}
-        </div>
-      )}
+      <Lightbox photos={gallery} index={i} onChange={setI} />
     </>
   );
 }

@@ -2,8 +2,9 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { login } from "@/lib/access.functions";
-import { Divider, FloralCorner } from "@/components/site/Ornaments";
-import { couple } from "@/content/wedding";
+import { Divider } from "@/components/site/Ornaments";
+import { Petals } from "@/components/site/Petals";
+import { couple, heroSlides } from "@/content/wedding";
 
 export const Route = createFileRoute("/acces")({
   head: () => ({
@@ -41,10 +42,11 @@ function Gate() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center px-6 py-16">
-      <FloralCorner position="tl" />
-      <FloralCorner position="br" />
-      <form onSubmit={submit} className="arch-frame fade-up relative w-full max-w-sm bg-card px-8 pb-10 pt-20 text-center">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-navy px-6 py-16">
+      <img src={heroSlides[0]!.src} alt="" aria-hidden className="ken-burns absolute inset-0 h-full w-full object-cover" />
+      <div className="overlay-navy absolute inset-0" />
+      <Petals />
+      <form onSubmit={submit} className="arch-frame fade-up relative w-full max-w-sm bg-card/95 px-8 pb-10 pt-20 text-center shadow-2xl backdrop-blur">
         <p className="text-xs uppercase tracking-[0.35em] text-terracotta">Invitation</p>
         <h1 className="font-script mt-3 text-5xl leading-tight text-navy">
           {couple.display.first} <span className="text-copper">&amp;</span> {couple.display.second}
@@ -63,7 +65,7 @@ function Gate() {
           required
         />
         {error && <p role="alert" className="mt-3 text-sm text-destructive">{error}</p>}
-        <button disabled={busy} className="mt-5 w-full rounded-md bg-primary py-2.5 text-sm uppercase tracking-widest text-primary-foreground disabled:opacity-60">
+        <button disabled={busy} className="mt-5 w-full rounded-full bg-terracotta py-3 text-cream shadow-lg shadow-terracotta/30 transition hover:bg-copper text-sm uppercase tracking-widest disabled:opacity-60">
           {busy ? "Vérification…" : "Entrer"}
         </button>
       </form>

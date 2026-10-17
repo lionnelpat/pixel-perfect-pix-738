@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Sparkles } from "lucide-react";
 import { PageHeader, PendingNote } from "@/components/site/Ornaments";
-import { dressCode } from "@/content/wedding";
+import { Reveal } from "@/components/site/Reveal";
+import { dressCode, gallery } from "@/content/wedding";
 
 export const Route = createFileRoute("/dress-code")({
   head: () => ({
@@ -14,31 +16,57 @@ export const Route = createFileRoute("/dress-code")({
   component: Dress,
 });
 
+/** Inspirations tenues (photos d'illustration). */
+const looks = [gallery[4]!, gallery[0]!, gallery[9]!];
+
 function Dress() {
   return (
     <>
-      <PageHeader eyebrow="Élégance intemporelle" title="Dress code">
-        <PendingNote>Consignes en cours de confirmation par les mariés</PendingNote>
+      <PageHeader eyebrow="Élégance intemporelle" title="Dress code" image={gallery[9]}>
+        <span className="inline-block rounded-full border border-gold/60 px-3 py-0.5 text-xs italic">Consignes en cours de confirmation par les mariés</span>
       </PageHeader>
-      <div className="mx-auto max-w-3xl px-6">
-        <div className="flex justify-center gap-8">
-          {dressCode.colors.map((c) => (
-            <div key={c.name} className="text-center">
-              <div className={`mx-auto h-20 w-20 rounded-full border border-gold shadow-md ${c.token}`} />
-              <p className="mt-2 font-serif text-lg text-navy">{c.name}</p>
-            </div>
+      <div className="mx-auto max-w-5xl px-6 py-20">
+        <div className="flex justify-center gap-6 sm:gap-14">
+          {dressCode.colors.map((c, k) => (
+            <Reveal key={c.name} from="zoom" delay={k * 150} className="text-center">
+              <div className={`mx-auto h-24 w-24 rounded-full border-2 border-gold shadow-xl ring-8 ring-gold/15 transition duration-500 hover:-translate-y-1 hover:scale-110 sm:h-32 sm:w-32 ${c.token}`} />
+              <p className="mt-3 font-serif text-xl text-navy">{c.name}</p>
+            </Reveal>
           ))}
         </div>
-        <p className="mt-10 text-center font-serif text-2xl italic text-terracotta">{dressCode.style}</p>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2">
-          {dressCode.rules.map((r) => (
-            <div key={r.title} className="card-elegant p-6 text-center">
-              <h2 className="text-xl font-semibold text-navy">{r.title}</h2>
-              <p className="mt-2 text-muted-foreground">{r.text}</p>
-            </div>
+        <Reveal className="mt-12 text-center">
+          <p className="font-script text-5xl text-terracotta">{dressCode.style}</p>
+        </Reveal>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {dressCode.rules.map((r, k) => (
+            <Reveal key={r.title} delay={k * 150}>
+              <div className="card-elegant h-full p-8 text-center transition duration-500 hover:-translate-y-1 hover:shadow-2xl">
+                <Sparkles className="mx-auto h-6 w-6 text-copper" aria-hidden />
+                <h2 className="mt-3 text-2xl font-semibold text-navy">{r.title}</h2>
+                <p className="mt-2 text-muted-foreground">{r.text}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
-        <p className="mt-8 rounded-md bg-secondary p-5 text-center text-sm">{dressCode.fabricNote}</p>
+
+        <Reveal className="mt-16">
+          <p className="text-center text-xs uppercase tracking-[0.4em] text-terracotta">Inspirations</p>
+          <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-5">
+            {looks.map((p, k) => (
+              <div key={p.src} className={`group overflow-hidden rounded-lg shadow-lg ${k === 1 ? "sm:-translate-y-6" : ""}`}>
+                <img src={p.src} alt={p.alt} loading="lazy" className="img-zoom aspect-[3/4] w-full object-cover" />
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal className="mt-14">
+          <p className="rounded-lg border border-gold/40 bg-secondary p-6 text-center font-serif text-lg">{dressCode.fabricNote}</p>
+          <div className="text-center">
+            <PendingNote>Détails du tissu commun à venir</PendingNote>
+          </div>
+        </Reveal>
       </div>
     </>
   );

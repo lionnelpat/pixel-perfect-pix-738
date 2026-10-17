@@ -1,26 +1,35 @@
-# Pixel Perfect Pix
+# Thibaut & Sylviane — site du mariage
 
-Implement exactly the screenshot and nothing else
+Site privé (protégé par mot de passe) du mariage de Thibaut & Sylviane, 20 & 21 novembre 2026 à Foumban.
 
-This project was built with [Lovable](https://lovable.dev).
+Réalisé par [Model Technologie](https://model-technologie.com).
 
-**Live app**: https://pixel-perfect-pix-738.lovable.app
+## Stack
 
-## Build with Lovable
+TanStack Start (React 19, SSR) · Tailwind CSS 4 · hébergement Netlify (fonctions serveur pour l'accès par mot de passe).
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/0b544b95-641b-42ca-ad8d-6650866dacfa).
+## Développement
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Prérequis : Node.js 22 et npm.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+npm install
+cp .env.example .env.local   # puis renseigner SITE_PASSWORD
 npm run dev
 ```
+
+## Contenu
+
+Tous les textes, dates, lieux et photos sont dans `src/content/wedding.ts`.
+Les points encore à confirmer avec les mariés sont suivis dans `docs/DECISIONS_A_VALIDER.md`.
+
+Pour remplacer les photos d'illustration : déposer les fichiers dans `public/photos/`,
+indiquer `src: "/photos/xxx.webp"` et retirer `placeholder`.
+
+## Déploiement (Netlify)
+
+Le site est relié au dépôt GitHub : chaque `git push` redéploie automatiquement.
+
+- Configuration de build : `netlify.toml` (`npm run build`, dossier publié `dist`).
+- Variable d'environnement obligatoire : `SITE_PASSWORD` (Site configuration → Environment variables).
+- Bandeau « version de travail » : `preview.banner` dans `src/content/wedding.ts`.
