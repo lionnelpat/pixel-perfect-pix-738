@@ -4,17 +4,55 @@ import { useState } from "react";
 import { login } from "@/lib/access.functions";
 import { Divider } from "@/components/site/Ornaments";
 import { Petals } from "@/components/site/Petals";
-import { couple, heroSlides } from "@/content/wedding";
+import { countdownTarget, couple, heroSlides, seo } from "@/content/wedding";
+import { responsive } from "@/lib/images";
+import { getSiteOrigin } from "@/lib/site-url";
 
 export const Route = createFileRoute("/acces")({
-  head: () => ({
-    meta: [
-      { title: "Accès invités — Thibaut & Sylviane" },
-      { name: "description", content: "Espace réservé aux invités du mariage de Thibaut & Sylviane." },
-      { property: "og:title", content: "Accès invités — Thibaut & Sylviane" },
-      { property: "og:description", content: "Espace réservé aux invités." },
-    ],
-  }),
+  loader: () => ({ origin: getSiteOrigin() }),
+  head: ({ loaderData }) => {
+    const url = `${loaderData?.origin ?? ""}/acces`;
+    const image = `${loaderData?.origin ?? ""}${seo.shareImage}`;
+    return {
+      meta: [
+        { title: seo.title },
+        { name: "description", content: seo.description },
+        // Seule page publique : indexable (les autres pages restent en noindex, voir __root).
+        { name: "robots", content: "index, follow, max-image-preview:large" },
+        { property: "og:title", content: `${couple.display.first} & ${couple.display.second} — 20 & 21 novembre 2026` },
+        { property: "og:description", content: seo.description },
+        { property: "og:url", content: url },
+        { property: "og:image", content: image },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        { property: "og:image:alt", content: seo.shareImageAlt },
+        { name: "twitter:image", content: image },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Event",
+            name: `Mariage de ${couple.display.first} & ${couple.display.second}`,
+            description: seo.description,
+            startDate: countdownTarget,
+            endDate: "2026-11-21T23:59:00+01:00",
+            eventStatus: "https://schema.org/EventScheduled",
+            eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+            image: [image],
+            url,
+            location: {
+              "@type": "Place",
+              name: seo.city,
+              address: { "@type": "PostalAddress", addressLocality: seo.city, addressCountry: seo.country },
+            },
+          }),
+        },
+      ],
+    };
+  },
   component: Gate,
 });
 
@@ -43,7 +81,7 @@ function Gate() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-navy px-6 py-16">
-      <img src={heroSlides[0]!.src} alt="" aria-hidden className="ken-burns absolute inset-0 h-full w-full object-cover" />
+      <img {...responsive(heroSlides[0]!.src, "100vw")} alt="" aria-hidden fetchPriority="high" style={{ objectPosition: heroSlides[0]!.position }} className="ken-burns absolute inset-0 h-full w-full object-cover" />
       <div className="overlay-navy absolute inset-0" />
       <Petals />
       <form onSubmit={submit} className="arch-frame fade-up relative w-full max-w-sm bg-card/95 px-8 pb-10 pt-20 text-center shadow-2xl backdrop-blur">
@@ -51,6 +89,8 @@ function Gate() {
         <h1 className="font-script mt-3 text-5xl leading-tight text-navy">
           {couple.display.first} <span className="text-copper">&amp;</span> {couple.display.second}
         </h1>
+        <p className="mt-2 font-serif text-lg text-navy">20 &amp; 21 novembre 2026</p>
+        <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Foumban · Cameroun</p>
         <Divider className="mt-2" />
         <label htmlFor="pw" className="mt-4 block text-sm text-muted-foreground">
           Saisissez le mot de passe indiqué par les mariés

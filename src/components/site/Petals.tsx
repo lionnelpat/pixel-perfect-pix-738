@@ -14,7 +14,8 @@ export function Petals({ className = "" }: { className?: string }) {
       {PETALS.map((p, i) => (
         <span
           key={i}
-          className="petal absolute -top-8 block"
+          // Sur téléphone, un pétale sur deux seulement.
+          className={`petal absolute -top-8 ${i % 2 ? "hidden sm:block" : "block"}`}
           style={
             {
               left: `${p.left}%`,

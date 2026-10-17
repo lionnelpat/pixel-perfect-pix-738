@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/site/Ornaments";
 import { PhotoCarousel } from "@/components/site/PhotoCarousel";
 import { Reveal } from "@/components/site/Reveal";
 import { gallery } from "@/content/wedding";
+import { responsive } from "@/lib/images";
 
 export const Route = createFileRoute("/galerie")({
   head: () => ({
@@ -25,7 +26,7 @@ function Gallery() {
 
   return (
     <>
-      <PageHeader eyebrow="Souvenirs" title="Galerie" image={gallery[2]} />
+      <PageHeader eyebrow="Souvenirs" title="Galerie" image={gallery[5]} />
       {n === 0 ? (
         <p className="mx-auto max-w-md px-6 py-20 text-center font-serif text-xl italic text-muted-foreground">
           Les photos seront partagées ici très bientôt, puis après le mariage.
@@ -39,7 +40,7 @@ function Gallery() {
             {gallery.map((p, k) => (
               <Reveal key={p.src + k} delay={(k % 3) * 120} className="mb-4 break-inside-avoid">
                 <button onClick={() => setI(k)} className="group relative block w-full overflow-hidden rounded-lg shadow-lg">
-                  <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="img-zoom w-full" />
+                  <img {...responsive(p.src, "(min-width: 640px) 33vw, 50vw")} alt={p.alt} loading="lazy" decoding="async" className="img-zoom w-full" />
                   <span className="absolute inset-0 flex items-end justify-between bg-gradient-to-t from-navy/80 via-transparent to-transparent p-4 text-left text-navy-foreground opacity-0 transition duration-500 group-hover:opacity-100">
                     <span className="font-serif text-lg italic">{p.alt}</span>
                     <Expand className="h-5 w-5 shrink-0 text-gold" aria-hidden />

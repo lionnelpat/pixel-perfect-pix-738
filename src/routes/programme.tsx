@@ -20,14 +20,14 @@ function Program() {
   const days = [...new Set(events.map((e) => e.day))];
   return (
     <>
-      <PageHeader eyebrow="Au fil de deux journées" title="Le programme" image={gallery[4]}>
+      <PageHeader eyebrow="Au fil de deux journées" title="Le programme" image={gallery[7]}>
         Le programme détaillé sera complété prochainement.
       </PageHeader>
       <div className="mx-auto max-w-5xl space-y-20 px-6 py-20">
         {days.map((d, di) => (
           <section key={d}>
             <Reveal from="zoom" className="text-center">
-              <p className="font-script text-4xl text-copper">Jour {di + 1}</p>
+              <p className="font-script text-4xl text-terracotta">Jour {di + 1}</p>
               <h2 className="mx-auto mt-2 w-fit rounded-full bg-navy px-7 py-2 font-sans text-sm uppercase tracking-[0.25em] text-navy-foreground shadow-lg">
                 {d}
               </h2>

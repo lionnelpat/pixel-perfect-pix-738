@@ -2,13 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Gift, Info, MapPin, Shirt } from "lucide-react";
 import { useState } from "react";
 import { Countdown } from "@/components/site/Countdown";
-import { EventCard } from "@/components/site/EventCard";
+import { EventCard, EventLine } from "@/components/site/EventCard";
 import { HeroSlider } from "@/components/site/HeroSlider";
 import { Lightbox } from "@/components/site/Lightbox";
 import { FloralCorner, SectionTitle } from "@/components/site/Ornaments";
 import { PhotoCarousel } from "@/components/site/PhotoCarousel";
 import { Reveal } from "@/components/site/Reveal";
 import { couple, countdownTarget, dressCode, events, gallery, heroSlides, story, storyPhotos, welcome } from "@/content/wedding";
+import { atWidth, responsive } from "@/lib/images";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,7 +25,7 @@ export const Route = createFileRoute("/")({
 
 const shortcuts = [
   { to: "/lieux", label: "Lieux & itinéraires", icon: MapPin, image: events[1]!.image },
-  { to: "/dress-code", label: "Dress code", icon: Shirt, image: gallery[4]! },
+  { to: "/dress-code", label: "Dress code", icon: Shirt, image: gallery[7]! },
   { to: "/infos", label: "Infos pratiques", icon: Info, image: events[3]!.image },
   { to: "/liste", label: "Liste de mariage", icon: Gift, image: storyPhotos[1]! },
 ] as const;
@@ -36,13 +37,13 @@ function Home() {
       <HeroSlider slides={heroSlides} />
 
       {/* Bienvenue */}
-      <section id="bienvenue" className="relative scroll-mt-16 overflow-hidden px-6 py-24">
+      <section id="bienvenue" className="relative scroll-mt-16 overflow-hidden px-6 py-16 sm:py-24">
         <FloralCorner position="tl" />
         <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2">
           <Reveal from="left" className="relative mx-auto w-full max-w-sm">
             <div className="animate-spin-slow absolute -inset-6 rounded-full border border-dashed border-gold/50" aria-hidden />
             <div className="arch-frame relative overflow-hidden">
-              <img src={heroSlides[1]!.src} alt={heroSlides[1]!.alt} loading="lazy" className="aspect-[3/4] w-full object-cover" />
+              <img {...responsive(heroSlides[1]!.src, "(min-width: 640px) 384px, 90vw")} alt={heroSlides[1]!.alt} loading="lazy" decoding="async" className="aspect-[3/4] w-full object-cover" />
             </div>
             <p className="font-script absolute -bottom-6 -right-4 rotate-[-6deg] rounded-lg bg-cream px-5 py-2 text-3xl text-terracotta shadow-xl">
               Ensemble pour la vie
@@ -56,7 +57,7 @@ function Home() {
                 <p key={p}>{p}</p>
               ))}
             </div>
-            <p className="font-script mt-6 text-4xl text-copper">
+            <p className="font-script mt-6 text-4xl text-terracotta">
               {couple.display.first} &amp; {couple.display.second}
             </p>
           </Reveal>
@@ -65,8 +66,8 @@ function Home() {
 
       {/* Compte à rebours */}
       <section
-        className="relative overflow-hidden bg-navy bg-cover bg-fixed bg-center px-6 py-24 text-center text-navy-foreground"
-        style={{ backgroundImage: `url(${gallery[1]!.src})` }}
+        className="relative overflow-hidden bg-navy bg-cover bg-center lg:bg-fixed px-6 py-16 sm:py-24 text-center text-navy-foreground"
+        style={{ backgroundImage: `url(${atWidth(gallery[4]!.src, 1200)})` }}
       >
         <div className="absolute inset-0 bg-navy/80" />
         <Reveal from="zoom" className="relative mx-auto max-w-3xl">
@@ -80,11 +81,11 @@ function Home() {
       </section>
 
       {/* Notre histoire */}
-      <section className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 lg:grid-cols-2">
+      <section className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-16 sm:py-24 lg:grid-cols-2">
         <Reveal from="left" className="order-2 text-center lg:order-1 lg:text-left">
           <p className="text-xs uppercase tracking-[0.4em] text-terracotta">Il était une fois</p>
           <h2 className="font-script mt-2 text-6xl text-navy">Notre histoire</h2>
-          <p className="mt-4 font-serif text-2xl italic text-copper">{story.date} · Yaoundé</p>
+          <p className="mt-4 font-serif text-2xl italic text-terracotta">{story.date} · Yaoundé</p>
           <p className="mt-5 font-serif text-xl leading-relaxed text-foreground/90">{story.paragraphs[1]}</p>
           <Link to="/histoire" className="group mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-terracotta">
             Lire notre histoire
@@ -93,13 +94,13 @@ function Home() {
         </Reveal>
         <Reveal from="right" className="relative order-1 mx-auto h-[440px] w-full max-w-md lg:order-2">
           <img
-            src={storyPhotos[0]!.src}
+            {...responsive(storyPhotos[0]!.src, "(min-width: 448px) 300px, 66vw")}
             alt={storyPhotos[0]!.alt}
             loading="lazy"
             className="absolute left-0 top-0 h-[78%] w-[66%] rounded-lg border-4 border-cream object-cover shadow-2xl transition duration-700 hover:z-10 hover:scale-105"
           />
           <img
-            src={storyPhotos[1]!.src}
+            {...responsive(storyPhotos[1]!.src, "(min-width: 448px) 280px, 62vw")}
             alt={storyPhotos[1]!.alt}
             loading="lazy"
             className="absolute bottom-0 right-0 h-[58%] w-[62%] rotate-3 rounded-lg border-4 border-cream object-cover shadow-2xl transition duration-700 hover:rotate-0 hover:scale-105"
@@ -108,16 +109,23 @@ function Home() {
       </section>
 
       {/* Programme */}
-      <section className="bg-secondary/60 px-6 py-24">
+      <section className="bg-secondary/60 px-6 py-16 sm:py-24">
         <SectionTitle eyebrow="Au fil de deux journées" title="Deux journées d’exception" />
-        <div className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <Reveal className="mx-auto mt-8 max-w-md sm:hidden">
+          <ul className="divide-y divide-gold/40 rounded-xl border border-gold/40 bg-card px-5">
+            {events.map((e) => (
+              <EventLine key={e.id} e={e} />
+            ))}
+          </ul>
+        </Reveal>
+        <div className="mx-auto mt-12 hidden max-w-6xl gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-4">
           {events.map((e, k) => (
             <Reveal key={e.id} delay={k * 120}>
               <EventCard e={e} />
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-12 text-center">
+        <Reveal className="mt-8 text-center sm:mt-12">
           <Link
             to="/programme"
             className="inline-block rounded-full bg-navy px-8 py-3 text-sm uppercase tracking-widest text-navy-foreground shadow-lg transition hover:-translate-y-0.5 hover:bg-terracotta"
@@ -128,7 +136,7 @@ function Home() {
       </section>
 
       {/* Bandeau défilant */}
-      <div className="overflow-hidden border-y border-gold/40 bg-navy py-4" aria-hidden>
+      <div className="hidden overflow-hidden border-y border-gold/40 bg-navy py-4 sm:block" aria-hidden>
         <div className="animate-marquee flex w-max gap-10 whitespace-nowrap font-serif text-2xl italic text-gold">
           {Array.from({ length: 2 }).flatMap((_, r) =>
             ["Raffinement", "Élégance intemporelle", "Célébration", "Deux familles, un même bonheur", "Ensemble pour la vie"].map((w) => (
@@ -141,7 +149,7 @@ function Home() {
       </div>
 
       {/* Moments */}
-      <section className="py-24">
+      <section className="py-16 sm:py-24">
         <SectionTitle eyebrow="Souvenirs" title="Nos plus beaux moments" />
         <Reveal className="mt-8">
           <PhotoCarousel photos={gallery} onOpen={setOpen} />
@@ -155,7 +163,7 @@ function Home() {
       <Lightbox photos={gallery} index={open} onChange={setOpen} />
 
       {/* Dress code */}
-      <section className="relative overflow-hidden px-6 py-20">
+      <section className="relative hidden overflow-hidden px-6 py-20 sm:block">
         <FloralCorner position="br" />
         <SectionTitle eyebrow="Élégance intemporelle" title="Nos couleurs" />
         <div className="mt-10 flex justify-center gap-6 sm:gap-12">
@@ -177,7 +185,7 @@ function Home() {
           {shortcuts.map((s, k) => (
             <Reveal key={s.to} delay={k * 100}>
               <Link to={s.to} className="group relative block aspect-[4/5] overflow-hidden rounded-lg shadow-lg">
-                <img src={s.image.src} alt="" loading="lazy" className="img-zoom absolute inset-0 h-full w-full object-cover" />
+                <img {...responsive(s.image.src, "(min-width: 1024px) 25vw, 50vw")} alt="" loading="lazy" decoding="async" className="img-zoom absolute inset-0 h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent transition-colors duration-500 group-hover:from-terracotta/90" />
                 <div className="absolute inset-x-0 bottom-0 p-4 text-navy-foreground">
                   <s.icon className="h-6 w-6 text-gold transition-transform duration-500 group-hover:-translate-y-1" aria-hidden />

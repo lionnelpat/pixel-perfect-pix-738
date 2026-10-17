@@ -1,6 +1,7 @@
 import { Clock, Lock, MapPin, Navigation } from "lucide-react";
 import { mapsEmbed, mapsLink, type WeddingEvent } from "@/content/wedding";
 import { PendingNote } from "./Ornaments";
+import { responsive } from "@/lib/images";
 
 export function MapButton({ e, className = "" }: { e: WeddingEvent; className?: string }) {
   return (
@@ -18,8 +19,8 @@ export function MapButton({ e, className = "" }: { e: WeddingEvent; className?: 
 export function EventCard({ e, showMap = false }: { e: WeddingEvent; showMap?: boolean }) {
   return (
     <article className="card-elegant group flex h-full flex-col overflow-hidden transition duration-500 hover:-translate-y-1.5 hover:shadow-2xl">
-      <div className="relative aspect-[16/10] overflow-hidden">
-        <img src={e.image.src} alt={e.image.alt} loading="lazy" className="img-zoom h-full w-full object-cover" />
+      <div className="relative aspect-[2/1] overflow-hidden sm:aspect-[16/10]">
+        <img {...responsive(e.image.src, "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw")} alt={e.image.alt} loading="lazy" decoding="async" className="img-zoom h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/10 to-transparent" />
         <p className="absolute bottom-3 left-4 flex items-center gap-1.5 rounded-full bg-cream/95 px-3 py-1 text-sm font-semibold text-navy shadow">
           <Clock className="h-3.5 w-3.5 text-terracotta" aria-hidden />
@@ -31,7 +32,7 @@ export function EventCard({ e, showMap = false }: { e: WeddingEvent; showMap?: b
           </p>
         )}
       </div>
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         <p className="text-xs uppercase tracking-[0.25em] text-terracotta">{e.day}</p>
         <h3 className="mt-2 text-2xl font-semibold text-navy">{e.title}</h3>
         <p className="mt-3 flex items-start gap-2 text-sm">
@@ -57,12 +58,35 @@ export function EventCard({ e, showMap = false }: { e: WeddingEvent; showMap?: b
   );
 }
 
+/** Version compacte (accueil sur téléphone) : heure, titre et lieu sur une ligne. */
+export function EventLine({ e }: { e: WeddingEvent }) {
+  return (
+    <li className="flex gap-4 py-4">
+      <p className="w-14 shrink-0 pt-0.5 font-serif text-xl font-semibold tabular-nums text-terracotta">{e.time}</p>
+      <div className="min-w-0">
+        <p className="text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground">{e.day}</p>
+        <p className="mt-0.5 text-lg font-semibold leading-snug text-navy">{e.title}</p>
+        <p className="mt-0.5 flex items-center gap-1.5 text-sm text-foreground/80">
+          <MapPin className="h-3.5 w-3.5 shrink-0 text-terracotta" aria-hidden />
+          {e.place}
+        </p>
+        {e.restricted && (
+          <p className="mt-1 flex items-center gap-1 text-xs italic text-muted-foreground">
+            <Lock className="h-3 w-3" aria-hidden /> Sur invitation
+          </p>
+        )}
+        {e.aConfirmer && <PendingNote>Horaire à confirmer</PendingNote>}
+      </div>
+    </li>
+  );
+}
+
 /** Lieu avec photo, carte Google intégrée et bouton d'itinéraire. */
 export function VenueCard({ e, reverse = false }: { e: WeddingEvent; reverse?: boolean }) {
   return (
     <article className="card-elegant overflow-hidden lg:grid lg:grid-cols-2">
       <div className={`group relative min-h-64 overflow-hidden ${reverse ? "lg:order-2" : ""}`}>
-        <img src={e.image.src} alt={e.image.alt} loading="lazy" className="img-zoom absolute inset-0 h-full w-full object-cover" />
+        <img {...responsive(e.image.src, "(min-width: 1024px) 50vw, 100vw")} alt={e.image.alt} loading="lazy" decoding="async" className="img-zoom absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
         <div className="absolute bottom-0 p-6 text-navy-foreground">
           <p className="text-xs uppercase tracking-[0.25em] text-gold">
@@ -84,7 +108,8 @@ export function VenueCard({ e, reverse = false }: { e: WeddingEvent; reverse?: b
             <Lock className="h-3.5 w-3.5" aria-hidden /> Sur invitation personnelle uniquement
           </p>
         )}
-        <div className="mt-5 aspect-[16/10] overflow-hidden rounded-md border border-gold/40">
+        {/* Sur téléphone, le bouton « Itinéraire » ouvre directement l'application Google Maps. */}
+        <div className="mt-5 hidden aspect-[16/10] overflow-hidden rounded-md border border-gold/40 sm:block">
           <iframe
             title={`Carte — ${e.place}`}
             src={mapsEmbed(e)}

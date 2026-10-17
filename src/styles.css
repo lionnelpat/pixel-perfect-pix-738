@@ -1,6 +1,13 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+/* Polices auto-hébergées, jeu de caractères latin uniquement. */
+@import "@fontsource/great-vibes/latin-400.css";
+@import "@fontsource/cormorant-garamond/latin-400.css";
+@import "@fontsource/cormorant-garamond/latin-400-italic.css";
+@import "@fontsource/cormorant-garamond/latin-600.css";
+@import "@fontsource/mulish/latin-400.css";
+@import "@fontsource/mulish/latin-600.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -123,7 +130,7 @@
 
 @keyframes fade-up {
   from {
-    opacity: 0;
+    opacity: 0.01;
     transform: translateY(14px);
   }
   to {
@@ -275,6 +282,14 @@
     color-mix(in oklab, var(--navy) 25%, transparent) 40%,
     color-mix(in oklab, var(--navy) 85%, transparent) 100%
   );
+}
+
+/* Sur téléphone, le reflet doré reste statique : l'animer redessine le texte à chaque image. */
+@media (max-width: 639px) {
+  .text-gold-shimmer {
+    animation: none;
+    background-position: 30% 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

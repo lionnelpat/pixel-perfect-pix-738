@@ -130,10 +130,11 @@ export function PreviewBanner() {
   const [hidden, setHidden] = useState(false);
   if (!preview.banner || hidden) return null;
   return (
-    <div role="status" className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4">
+    <div role="status" className="fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 flex justify-center px-4">
       <p className="flex items-center gap-3 rounded-full border border-gold/50 bg-navy/90 py-2 pl-4 pr-2 text-xs text-navy-foreground shadow-lg backdrop-blur sm:text-sm">
         <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-terracotta" aria-hidden />
-        {preview.banner}
+        <span className="sm:hidden">{preview.bannerShort}</span>
+        <span className="hidden sm:inline">{preview.banner}</span>
         <button onClick={() => setHidden(true)} aria-label="Masquer le bandeau" className="rounded-full p-1 opacity-70 transition hover:bg-navy-foreground/10 hover:opacity-100">
           <X className="h-3.5 w-3.5" />
         </button>

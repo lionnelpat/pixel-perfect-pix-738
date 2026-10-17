@@ -3,6 +3,7 @@ import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import type { Photo } from "@/content/wedding";
 import { couple } from "@/content/wedding";
+import { responsive } from "@/lib/images";
 import { Petals } from "./Petals";
 
 const DELAY = 6500;
@@ -10,8 +11,13 @@ const DELAY = 6500;
 export function HeroSlider({ slides }: { slides: Photo[] }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [seen, setSeen] = useState(() => new Set([0, 1]));
   const n = slides.length;
   const go = useCallback((d: number) => setI((c) => (c + d + n) % n), [n]);
+
+  useEffect(() => {
+    setSeen((s) => (s.has(i) && s.has((i + 1) % n) ? s : new Set([...s, i, (i + 1) % n])));
+  }, [i, n]);
 
   useEffect(() => {
     if (paused || n < 2) return;
@@ -34,14 +40,17 @@ export function HeroSlider({ slides }: { slides: Photo[] }) {
           style={{ opacity: k === i ? 1 : 0 }}
           aria-hidden={k !== i}
         >
-          <img
-            key={k === i ? `on-${i}` : "off"}
-            src={s.src}
-            alt={s.alt}
-            className={`h-full w-full object-cover ${k === i ? "ken-burns" : ""}`}
-            fetchPriority={k === 0 ? "high" : "auto"}
-            loading={k === 0 ? "eager" : "lazy"}
-          />
+          {seen.has(k) && (
+            <img
+              key={k === i ? `on-${i}` : "off"}
+              {...responsive(s.src, "100vw")}
+              alt={s.alt}
+              style={{ objectPosition: s.position }}
+              className={`h-full w-full object-cover ${k === i ? "ken-burns" : ""}`}
+              fetchPriority={k === 0 ? "high" : "low"}
+              decoding={k === 0 ? "sync" : "async"}
+            />
+          )}
         </div>
       ))}
       <div className="overlay-navy absolute inset-0" />
@@ -51,7 +60,7 @@ export function HeroSlider({ slides }: { slides: Photo[] }) {
         <p className="fade-up text-xs uppercase tracking-[0.5em] text-gold sm:text-sm" style={{ animationDelay: "0.2s" }}>
           Nous nous marions
         </p>
-        <h1 className="font-script fade-up mt-4 text-7xl leading-[0.9] drop-shadow-lg sm:text-8xl lg:text-9xl" style={{ animationDelay: "0.5s" }}>
+        <h1 className="font-script fade-up mt-4 text-7xl leading-[0.9] drop-shadow-lg sm:text-8xl lg:text-9xl">
           <span className="text-gold-shimmer px-2">{couple.display.first}</span>
           <span className="animate-heartbeat my-1 block text-5xl text-copper sm:text-6xl">&amp;</span>
           <span className="text-gold-shimmer px-2">{couple.display.second}</span>

@@ -9,6 +9,8 @@ export type Photo = {
   alt: string;
   /** Photo d'illustration libre de droits (Unsplash) — à remplacer par les photos des mariés. */
   placeholder?: boolean;
+  /** Point de cadrage quand la photo est recadrée (CSS object-position), ex. "50% 20%" pour garder les visages. */
+  position?: string;
 };
 
 /** Image Unsplash (licence libre) redimensionnée. */
@@ -25,9 +27,23 @@ export const couple = {
 /** Bandeau « version de travail » affiché pour la relecture des mariés. Mettre `banner: null` pour le retirer. */
 export const preview = {
   banner: "Version de travail : photos provisoires, certaines informations restent à confirmer." as string | null,
+  /** Version courte affichée sur téléphone. */
+  bannerShort: "Version de travail · photos provisoires",
 };
 
 export const credit = { label: "Model Technologie", url: "https://model-technologie.com" };
+
+/** Référencement : seule la page d'accueil publique (/acces) est indexée par les moteurs de recherche. */
+export const seo = {
+  title: "Mariage de Thibaut & Sylviane — 20 & 21 novembre 2026 · Foumban",
+  description:
+    "Thibaut & Sylviane se marient les 20 et 21 novembre 2026 à Foumban, au Cameroun. Le site des invités : programme, lieux, dress code, liste de mariage et livre d’or.",
+  /** Aperçu affiché quand le lien est partagé (WhatsApp, Facebook…), 1200 × 630, dans public/. */
+  shareImage: "/photos/partage.jpg",
+  shareImageAlt: "Thibaut & Sylviane",
+  city: "Foumban",
+  country: "CM",
+};
 
 /** Début de la dot, heure du Cameroun (UTC+1). */
 export const countdownTarget = "2026-11-20T15:00:00+01:00";
@@ -181,10 +197,8 @@ const P = (id: string, alt: string): Photo => ({ src: unsplash(id), alt, placeho
 
 /** Diaporama plein écran de l'accueil (3 à 6 photos, format paysage ou portrait). */
 export const heroSlides: Photo[] = [
-  P("1790563380253-d4cb4bed4075", "Le couple enlacé en tenue traditionnelle"),
-  P("1695281536457-01f9a07c575b", "Les mariés enlacés sous les arbres"),
-  P("1665416557437-6dd757e90ce8", "La mariée et son diadème, tout sourire"),
-  P("1661332517932-2d441bfb2994", "Le couple en tenue traditionnelle dorée"),
+  { src: "/photos/accueil-2.png", alt: "Thibaut et Sylviane, tout de blanc vêtus", position: "50% 20%" },
+  { src: "/photos/accueil-1.png", alt: "Sylviane en robe bordeaux, Thibaut en costume bleu", position: "50% 15%" },
 ];
 
 /** Photos de la section « Notre histoire ». */
@@ -194,6 +208,9 @@ export const storyPhotos: Photo[] = [
 ];
 
 export const gallery: Photo[] = [
+  { src: "/photos/accueil-2.png", alt: "Thibaut et Sylviane, tout de blanc vêtus", position: "50% 20%" },
+  { src: "/photos/accueil-1.png", alt: "Sylviane en robe bordeaux, Thibaut en costume bleu", position: "50% 15%" },
+  { src: "/photos/galerie-01.png", alt: "Thibaut et Sylviane en famille sur le canapé" },
   P("1790563380253-d4cb4bed4075", "Le couple enlacé en tenue traditionnelle"),
   P("1695281535578-ce371088bb3e", "Les mariés dans un jardin"),
   P("1603214924133-5c2c78471b73", "Portrait des mariés en studio"),

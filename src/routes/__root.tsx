@@ -13,6 +13,7 @@ import {
 import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import greatVibes from "@fontsource/great-vibes/files/great-vibes-latin-400-normal.woff2?url";
 import { checkAccess } from "../lib/access.functions";
 import { PreviewBanner, SiteFooter, SiteNav } from "../components/site/SiteNav";
 import { PageHeader } from "../components/site/Ornaments";
@@ -61,22 +62,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      // Pages réservées aux invités : jamais indexées. La vitrine (/acces) remplace cette valeur.
       { name: "robots", content: "noindex, nofollow" },
       { title: "Thibaut & Sylviane — 20 & 21 novembre 2026" },
       { name: "description", content: "Le site du mariage de Thibaut & Sylviane." },
+      { name: "theme-color", content: "#132548" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:site_name", content: "Thibaut & Sylviane" },
+      { property: "og:locale", content: "fr_FR" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Mulish:wght@400;600&display=swap",
-      },
+      // Police du grand titre : préchargée car c'est le premier élément visible.
+      { rel: "preload", href: greatVibes, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
     ],
   }),
   shellComponent: RootShell,

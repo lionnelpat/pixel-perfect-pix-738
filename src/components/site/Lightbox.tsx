@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect } from "react";
 import type { Photo } from "@/content/wedding";
+import { responsive } from "@/lib/images";
 
 export function Lightbox({ photos, index, onChange }: { photos: Photo[]; index: number | null; onChange: (i: number | null) => void }) {
   const n = photos.length;
@@ -33,7 +34,7 @@ export function Lightbox({ photos, index, onChange }: { photos: Photo[]; index: 
       onClick={() => onChange(null)}
     >
       <figure className="fade-up text-center" key={p.src} onClick={(e) => e.stopPropagation()}>
-        <img src={p.src} alt={p.alt} className="max-h-[80vh] max-w-full rounded-md shadow-2xl ring-1 ring-gold/40" />
+        <img {...responsive(p.src, "100vw")} alt={p.alt} className="max-h-[80vh] max-w-full rounded-md shadow-2xl ring-1 ring-gold/40" />
         <figcaption className="mt-3 font-serif text-lg italic text-navy-foreground/85">{p.alt}</figcaption>
         <p className="text-xs tracking-widest text-gold">
           {index! + 1} / {n}

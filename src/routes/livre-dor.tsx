@@ -53,7 +53,7 @@ function Guestbook() {
 
   return (
     <>
-      <PageHeader eyebrow="Vos mots doux" title="Livre d’or" image={gallery[11]} />
+      <PageHeader eyebrow="Vos mots doux" title="Livre d’or" image={gallery[14]} />
 
       <div className="mx-auto max-w-6xl px-6 py-20">
         <Reveal className="mx-auto max-w-2xl text-center">

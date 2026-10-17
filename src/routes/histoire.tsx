@@ -3,6 +3,7 @@ import { Heart } from "lucide-react";
 import { Divider, PageHeader } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
 import { gallery, story, storyPhotos } from "@/content/wedding";
+import { responsive } from "@/lib/images";
 
 export const Route = createFileRoute("/histoire")({
   head: () => ({
@@ -17,12 +18,12 @@ export const Route = createFileRoute("/histoire")({
 });
 
 /** Une photo différente à côté de chaque paragraphe du récit. */
-const photos = [storyPhotos[0]!, gallery[5]!, storyPhotos[1]!];
+const photos = [storyPhotos[0]!, gallery[8]!, storyPhotos[1]!];
 
 function Story() {
   return (
     <>
-      <PageHeader eyebrow="Il était une fois" title="Notre histoire" image={gallery[1]}>
+      <PageHeader eyebrow="Il était une fois" title="Notre histoire" image={gallery[4]}>
         <p className="font-serif text-2xl italic">{story.date} · Yaoundé</p>
       </PageHeader>
 
@@ -40,7 +41,7 @@ function Story() {
                 </span>
                 <Reveal from={even ? "left" : "right"} className={even ? "" : "md:order-2"}>
                   <div className="group overflow-hidden rounded-lg border-4 border-cream shadow-2xl">
-                    <img src={photo.src} alt={photo.alt} loading="lazy" className="img-zoom aspect-[4/5] w-full object-cover" />
+                    <img {...responsive(photo.src, "(min-width: 768px) 50vw, 100vw")} alt={photo.alt} loading="lazy" decoding="async" className="img-zoom aspect-[4/5] w-full object-cover" />
                   </div>
                 </Reveal>
                 <Reveal from={even ? "right" : "left"}>

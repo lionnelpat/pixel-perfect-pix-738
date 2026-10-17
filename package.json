@@ -17,6 +17,9 @@
     "rolldown": "1.2.1"
   },
   "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/great-vibes": "^5.3.0",
+    "@fontsource/mulish": "^5.3.0",
     "@hookform/resolvers": "^5.2.2",
     "@netlify/blobs": "^11.1.4",
     "@radix-ui/react-accordion": "^1.2.12",

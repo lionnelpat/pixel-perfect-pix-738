@@ -3,6 +3,7 @@ import { Sparkles } from "lucide-react";
 import { PageHeader, PendingNote } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
 import { dressCode, gallery } from "@/content/wedding";
+import { responsive } from "@/lib/images";
 
 export const Route = createFileRoute("/dress-code")({
   head: () => ({
@@ -17,12 +18,12 @@ export const Route = createFileRoute("/dress-code")({
 });
 
 /** Inspirations tenues (photos d'illustration). */
-const looks = [gallery[4]!, gallery[0]!, gallery[9]!];
+const looks = [gallery[7]!, gallery[3]!, gallery[12]!];
 
 function Dress() {
   return (
     <>
-      <PageHeader eyebrow="Élégance intemporelle" title="Dress code" image={gallery[9]}>
+      <PageHeader eyebrow="Élégance intemporelle" title="Dress code" image={gallery[12]}>
         <span className="inline-block rounded-full border border-gold/60 px-3 py-0.5 text-xs italic">Consignes en cours de confirmation par les mariés</span>
       </PageHeader>
       <div className="mx-auto max-w-5xl px-6 py-20">
@@ -55,7 +56,7 @@ function Dress() {
           <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-5">
             {looks.map((p, k) => (
               <div key={p.src} className={`group overflow-hidden rounded-lg shadow-lg ${k === 1 ? "sm:-translate-y-6" : ""}`}>
-                <img src={p.src} alt={p.alt} loading="lazy" className="img-zoom aspect-[3/4] w-full object-cover" />
+                <img {...responsive(p.src, "33vw")} alt={p.alt} loading="lazy" decoding="async" className="img-zoom aspect-[3/4] w-full object-cover" />
               </div>
             ))}
           </div>

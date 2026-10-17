@@ -2,6 +2,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import type { Photo } from "@/content/wedding";
+import { responsive } from "@/lib/images";
 
 /** Carrousel de photos centré, en boucle et défilement automatique. */
 export function PhotoCarousel({ photos, onOpen }: { photos: Photo[]; onOpen?: (index: number) => void }) {
@@ -49,7 +50,7 @@ export function PhotoCarousel({ photos, onOpen }: { photos: Photo[]; onOpen?: (i
                 }`}
                 aria-label={p.alt}
               >
-                <img src={p.src} alt={p.alt} loading="lazy" className="img-zoom aspect-[3/4] w-full object-cover" />
+                <img {...responsive(p.src, "(min-width: 1024px) 32vw, (min-width: 640px) 45vw, 78vw")} alt={p.alt} loading="lazy" decoding="async" style={{ objectPosition: p.position }} className="img-zoom aspect-[3/4] w-full object-cover" />
               </button>
             </div>
           ))}
