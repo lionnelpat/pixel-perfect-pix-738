@@ -23,7 +23,7 @@ function safeEqual(a: string, b: string) {
 }
 
 export const checkAccess = createServerFn({ method: "GET" }).handler(async () => {
-  const pw = process.env.SITE_PASSWORD;
+  const pw = process.env["SITE_PASSWORD"];
   const c = getCookie(COOKIE);
   if (!pw || !c) return { ok: false };
   return { ok: safeEqual(c, await tokenFor(pw)) };
@@ -32,7 +32,7 @@ export const checkAccess = createServerFn({ method: "GET" }).handler(async () =>
 export const login = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ password: z.string().min(1).max(200) }).parse(d))
   .handler(async ({ data }) => {
-    const pw = process.env.SITE_PASSWORD;
+    const pw = process.env["SITE_PASSWORD"];
     if (!pw) return { ok: false, error: "L’accès n’est pas encore configuré." };
 
     const ip = getRequestIP({ xForwardedFor: true }) ?? "unknown";

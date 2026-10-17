@@ -48,9 +48,9 @@ function Gallery() {
           ))}
         </div>
       )}
-      {i !== null && (
-        <div role="dialog" aria-modal="true" aria-label={gallery[i].alt} className="fixed inset-0 z-50 flex items-center justify-center bg-navy/95 p-4" onClick={() => setI(null)}>
-          <img src={gallery[i].src} alt={gallery[i].alt} className="max-h-[85vh] max-w-full rounded" onClick={(e) => e.stopPropagation()} />
+      {i !== null && gallery[i] && (
+        <div role="dialog" aria-modal="true" aria-label={gallery[i]!.alt} className="fixed inset-0 z-50 flex items-center justify-center bg-navy/95 p-4" onClick={() => setI(null)}>
+          <img src={gallery[i]!.src} alt={gallery[i]!.alt} className="max-h-[85vh] max-w-full rounded" onClick={(e) => e.stopPropagation()} />
           <button aria-label="Fermer" className="absolute right-4 top-4 text-navy-foreground" onClick={() => setI(null)}><X /></button>
           {n > 1 && (
             <>
