@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { EventCard } from "@/components/site/EventCard";
 import { PageHeader } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
-import { events, gallery } from "@/content/wedding";
+import { events, pagePhotos } from "@/content/wedding";
 
 export const Route = createFileRoute("/programme")({
   head: () => ({
@@ -20,7 +20,7 @@ function Program() {
   const days = [...new Set(events.map((e) => e.day))];
   return (
     <>
-      <PageHeader eyebrow="Au fil de deux journées" title="Le programme" image={gallery[7]}>
+      <PageHeader eyebrow="Au fil de deux journées" title="Le programme" image={pagePhotos.programme}>
         Le programme détaillé sera complété prochainement.
       </PageHeader>
       <div className="mx-auto max-w-5xl space-y-20 px-6 py-20">

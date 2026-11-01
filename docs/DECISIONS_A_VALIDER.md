@@ -16,13 +16,14 @@ Tout le contenu se modifie dans `src/content/wedding.ts`.
 - Enfants : à quels événements ?
 - Dates clés pour une chronologie (rencontre famille 27/10/2022, etc.) — à valider avant affichage (données personnelles, enfants).
 - Liens cartographiques précis pour chaque lieu.
-- Liste de mariage : noms, villes et liens des 3 enseignes (choix du marié en cours). Le principe du bon cadeau est validé.
-- Photos du couple (accueil + galerie).
+- Liste de mariage : enseignes connues (Mahima et ORCA à Douala, PLACE à Yaoundé). Reste à confirmer : quel magasin pour Mahima (Akwa ou Bonamoussadi) et ORCA (Akwa rue Joffre ou Youpwè), leurs téléphones (les annuaires en ligne se contredisent), et l’adresse de PLACE (introuvable en ligne).
 - Programme détaillé (annoncé par les mariés).
 - Soirée de gala : faut-il une restriction nominative sur le site ? Actuellement : mention « sur invitation ».
 
 ## Décidé
 - Livre d'or : messages publics après validation par les mariés sur `/admin` (mot de passe `ADMIN_PASSWORD`). Aucun message n'est supprimé : on l'archive.
+- Photos du couple : 11 photos réparties (accueil, pages, galerie) le 01/11/2026. Les photos des lieux restent des illustrations.
+- Bandeau « version de travail » retiré pour la publication (01/11/2026).
 - Invitations numériques au gala (envoi e-mail/WhatsApp, suivi des confirmations) : abandonné par les mariés (17/10/2026).
 
 ## Non développé (en attente)

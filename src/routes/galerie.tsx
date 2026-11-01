@@ -5,7 +5,7 @@ import { Lightbox } from "@/components/site/Lightbox";
 import { PageHeader } from "@/components/site/Ornaments";
 import { PhotoCarousel } from "@/components/site/PhotoCarousel";
 import { Reveal } from "@/components/site/Reveal";
-import { gallery } from "@/content/wedding";
+import { gallery, pagePhotos } from "@/content/wedding";
 import { responsive } from "@/lib/images";
 
 export const Route = createFileRoute("/galerie")({
@@ -26,7 +26,7 @@ function Gallery() {
 
   return (
     <>
-      <PageHeader eyebrow="Souvenirs" title="Galerie" image={gallery[5]} />
+      <PageHeader eyebrow="Souvenirs" title="Galerie" image={pagePhotos.galerie} />
       {n === 0 ? (
         <p className="mx-auto max-w-md px-6 py-20 text-center font-serif text-xl italic text-muted-foreground">
           Les photos seront partagées ici très bientôt, puis après le mariage.

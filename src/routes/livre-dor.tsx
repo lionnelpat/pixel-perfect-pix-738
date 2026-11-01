@@ -5,7 +5,7 @@ import { useState } from "react";
 import { MessageCarousel } from "@/components/site/MessageCarousel";
 import { Divider, PageHeader } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
-import { gallery, guestbook } from "@/content/wedding";
+import { guestbook, pagePhotos } from "@/content/wedding";
 import { listMessages, postMessage } from "@/lib/guestbook.functions";
 
 export const Route = createFileRoute("/livre-dor")({
@@ -53,7 +53,7 @@ function Guestbook() {
 
   return (
     <>
-      <PageHeader eyebrow="Vos mots doux" title="Livre d’or" image={gallery[14]} />
+      <PageHeader eyebrow="Vos mots doux" title="Livre d’or" image={pagePhotos.livreDor} />
 
       <div className="mx-auto max-w-6xl px-6 py-20">
         <Reveal className="mx-auto max-w-2xl text-center">

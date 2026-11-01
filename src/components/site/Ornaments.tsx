@@ -40,7 +40,7 @@ export function PageHeader({
   const bg = image ?? heroSlides[0]!;
   return (
     <header className="relative flex min-h-[52svh] items-end justify-center overflow-hidden bg-navy pb-14 pt-32 text-center text-navy-foreground">
-      <img {...responsive(bg.src, "100vw")} alt="" aria-hidden fetchPriority="high" className="ken-burns absolute inset-0 h-full w-full object-cover" />
+      <img {...responsive(bg.src, "100vw")} alt="" aria-hidden fetchPriority="high" style={{ objectPosition: bg.position }} className="ken-burns absolute inset-0 h-full w-full object-cover" />
       <div className="overlay-navy absolute inset-0" />
       <div className="relative mx-auto max-w-2xl px-6">
         <p className="fade-up text-xs uppercase tracking-[0.4em] text-gold">{eyebrow}</p>

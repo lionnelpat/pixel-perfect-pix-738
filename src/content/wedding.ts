@@ -26,9 +26,9 @@ export const couple = {
 
 /** Bandeau « version de travail » affiché pour la relecture des mariés. Mettre `banner: null` pour le retirer. */
 export const preview = {
-  banner: "Version de travail : photos provisoires, certaines informations restent à confirmer." as string | null,
+  banner: null as string | null,
   /** Version courte affichée sur téléphone. */
-  bannerShort: "Version de travail · photos provisoires",
+  bannerShort: "Version de travail",
 };
 
 export const credit = { label: "Model Technologie", url: "https://model-technologie.com" };
@@ -153,18 +153,26 @@ export type GiftStore = {
   name: string;
   city?: string;
   address?: string;
+  /** Téléphone public de l'enseigne, ex. "+237 233 00 00 00". */
+  phone?: string;
+  /** Recherche Google Maps (nom + ville) : ouvre la fiche de l'enseigne et ses magasins. */
+  mapQuery?: string;
   /** Lien vers la liste en ligne de l'enseigne, s'il existe. */
   url?: string;
   aConfirmer?: boolean;
 };
 
+export function storeMapsLink(s: GiftStore) {
+  return s.mapQuery && `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.mapQuery)}`;
+}
+
 export const registry = {
   intro: "Votre présence est le plus précieux des cadeaux. Pour celles et ceux qui souhaitent nous gâter, deux possibilités s’offrent à vous.",
-  /** Les 3 enseignes où trouver la liste — choix en cours par les mariés. */
+  /** Les 3 enseignes choisies par les mariés. Téléphones : non publiés tant que non vérifiés (voir docs/DECISIONS_A_VALIDER.md). */
   stores: [
-    { name: "Enseigne n°1", aConfirmer: true },
-    { name: "Enseigne n°2", aConfirmer: true },
-    { name: "Enseigne n°3", aConfirmer: true },
+    { name: "Supermarché Mahima", city: "Douala", mapQuery: "Supermarché Mahima Douala" },
+    { name: "ORCA", city: "Douala", mapQuery: "ORCA Douala" },
+    { name: "PLACE", city: "Yaoundé", aConfirmer: true },
   ] as GiftStore[],
   voucher: {
     title: "Le bon cadeau",
@@ -190,37 +198,53 @@ export function mapsEmbed(e: WeddingEvent) {
 }
 
 /**
- * Photos d'illustration : à remplacer par celles des mariés.
- * Déposer les fichiers dans public/photos/ puis indiquer src: "/photos/xxx.webp" et retirer `placeholder`.
+ * Photos des mariés, dans public/photos/.
+ * Pour en ajouter une : déposer le fichier (nom sans espaces), la déclarer ici, puis l'ajouter à `gallery`.
  */
-const P = (id: string, alt: string): Photo => ({ src: unsplash(id), alt, placeholder: true });
+const photos = {
+  blanc: { src: "/photos/accueil-2.png", alt: "Thibaut et Sylviane, tout de blanc vêtus", position: "50% 20%" },
+  bordeaux: { src: "/photos/accueil-1.png", alt: "Sylviane en robe bordeaux, Thibaut en costume bleu", position: "50% 15%" },
+  pagneArche: { src: "/photos/couple-pagne-arche.jpg", alt: "Thibaut et Sylviane enlacés, en pagne, sous une arche fleurie", position: "50% 18%" },
+  pagneFleurs: { src: "/photos/couple-pagne-fleurs.jpg", alt: "Thibaut et Sylviane en pagne, devant un décor de fleurs blanches", position: "50% 18%" },
+  chic: { src: "/photos/couple-chic.jpg", alt: "Sylviane en robe verte au bras de Thibaut", position: "50% 15%" },
+  canape: { src: "/photos/couple-canape.jpg", alt: "Sylviane cache les yeux de Thibaut, sur le canapé", position: "50% 25%" },
+  alliances: { src: "/photos/souvenir-alliances.jpg", alt: "Montage souvenir : le couple sur le canapé et les alliances", position: "50% 30%" },
+  thibaut: { src: "/photos/thibaut-costume.jpg", alt: "Thibaut en costume bleu et gris", position: "50% 15%" },
+  sylviane: { src: "/photos/sylviane-robe-rouge.jpg", alt: "Sylviane en robe rouge", position: "50% 15%" },
+  familleSalon: { src: "/photos/famille-salon.jpg", alt: "Thibaut et Sylviane en famille dans le salon", position: "50% 40%" },
+  familleCanape: { src: "/photos/galerie-01.png", alt: "Thibaut et Sylviane en famille sur le canapé", position: "50% 25%" },
+} satisfies Record<string, Photo>;
 
 /** Diaporama plein écran de l'accueil (3 à 6 photos, format paysage ou portrait). */
-export const heroSlides: Photo[] = [
-  { src: "/photos/accueil-2.png", alt: "Thibaut et Sylviane, tout de blanc vêtus", position: "50% 20%" },
-  { src: "/photos/accueil-1.png", alt: "Sylviane en robe bordeaux, Thibaut en costume bleu", position: "50% 15%" },
-];
+export const heroSlides: Photo[] = [photos.pagneArche, photos.blanc, photos.chic, photos.bordeaux];
 
-/** Photos de la section « Notre histoire ». */
-export const storyPhotos: Photo[] = [
-  P("1665258918932-9e358bcfba0f", "Baisemain sur un escalier en bois"),
-  P("1507650029083-5092f9b2b2e6", "Échange des alliances"),
-];
+/** Photos de la section « Notre histoire » (accueil et page Notre histoire, une par paragraphe). */
+export const storyPhotos: Photo[] = [photos.canape, photos.alliances, photos.pagneFleurs];
+
+/** Photo choisie pour chaque page (bandeau du haut et vignettes). */
+export const pagePhotos = {
+  welcome: photos.pagneFleurs,
+  countdown: photos.blanc,
+  histoire: photos.chic,
+  programme: photos.blanc,
+  dressCode: photos.pagneArche,
+  /** Inspirations tenues : les mariés eux-mêmes. */
+  looks: [photos.sylviane, photos.chic, photos.thibaut],
+  liste: photos.bordeaux,
+  galerie: photos.pagneArche,
+  livreDor: photos.familleCanape,
+} satisfies Record<string, Photo | Photo[]>;
 
 export const gallery: Photo[] = [
-  { src: "/photos/accueil-2.png", alt: "Thibaut et Sylviane, tout de blanc vêtus", position: "50% 20%" },
-  { src: "/photos/accueil-1.png", alt: "Sylviane en robe bordeaux, Thibaut en costume bleu", position: "50% 15%" },
-  { src: "/photos/galerie-01.png", alt: "Thibaut et Sylviane en famille sur le canapé" },
-  P("1790563380253-d4cb4bed4075", "Le couple enlacé en tenue traditionnelle"),
-  P("1695281535578-ce371088bb3e", "Les mariés dans un jardin"),
-  P("1603214924133-5c2c78471b73", "Portrait des mariés en studio"),
-  P("1665416557437-6dd757e90ce8", "La mariée et son diadème"),
-  P("1661332517932-2d441bfb2994", "Tenues traditionnelles dorées"),
-  P("1790563378465-572d52edf0b1", "Le couple main dans la main"),
-  P("1665258918932-9e358bcfba0f", "Baisemain sur un escalier"),
-  P("1618999114008-fbf937170cdb", "Parure de perles traditionnelle"),
-  P("1695281536457-01f9a07c575b", "Étreinte sous les arbres"),
-  P("1790563379927-b68ee9187a8c", "Le couple en tenue de cérémonie"),
-  P("1507650029083-5092f9b2b2e6", "Échange des alliances"),
-  P("1745231991466-19d41014cc66", "Tendresse au coucher du soleil"),
+  photos.pagneArche,
+  photos.blanc,
+  photos.chic,
+  photos.canape,
+  photos.sylviane,
+  photos.thibaut,
+  photos.bordeaux,
+  photos.pagneFleurs,
+  photos.familleSalon,
+  photos.alliances,
+  photos.familleCanape,
 ];

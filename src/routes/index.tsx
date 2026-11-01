@@ -8,7 +8,7 @@ import { Lightbox } from "@/components/site/Lightbox";
 import { FloralCorner, SectionTitle } from "@/components/site/Ornaments";
 import { PhotoCarousel } from "@/components/site/PhotoCarousel";
 import { Reveal } from "@/components/site/Reveal";
-import { couple, countdownTarget, dressCode, events, gallery, heroSlides, story, storyPhotos, welcome } from "@/content/wedding";
+import { couple, countdownTarget, dressCode, events, gallery, heroSlides, pagePhotos, story, storyPhotos, welcome } from "@/content/wedding";
 import { atWidth, responsive } from "@/lib/images";
 
 export const Route = createFileRoute("/")({
@@ -25,9 +25,9 @@ export const Route = createFileRoute("/")({
 
 const shortcuts = [
   { to: "/lieux", label: "Lieux & itinéraires", icon: MapPin, image: events[1]!.image },
-  { to: "/dress-code", label: "Dress code", icon: Shirt, image: gallery[7]! },
+  { to: "/dress-code", label: "Dress code", icon: Shirt, image: pagePhotos.looks[0]! },
   { to: "/infos", label: "Infos pratiques", icon: Info, image: events[3]!.image },
-  { to: "/liste", label: "Liste de mariage", icon: Gift, image: storyPhotos[1]! },
+  { to: "/liste", label: "Liste de mariage", icon: Gift, image: pagePhotos.liste },
 ] as const;
 
 function Home() {
@@ -43,7 +43,7 @@ function Home() {
           <Reveal from="left" className="relative mx-auto w-full max-w-sm">
             <div className="animate-spin-slow absolute -inset-6 rounded-full border border-dashed border-gold/50" aria-hidden />
             <div className="arch-frame relative overflow-hidden">
-              <img {...responsive(heroSlides[1]!.src, "(min-width: 640px) 384px, 90vw")} alt={heroSlides[1]!.alt} loading="lazy" decoding="async" className="aspect-[3/4] w-full object-cover" />
+              <img {...responsive(pagePhotos.welcome.src, "(min-width: 640px) 384px, 90vw")} alt={pagePhotos.welcome.alt} loading="lazy" decoding="async" style={{ objectPosition: pagePhotos.welcome.position }} className="aspect-[3/4] w-full object-cover" />
             </div>
             <p className="font-script absolute -bottom-6 -right-4 rotate-[-6deg] rounded-lg bg-cream px-5 py-2 text-3xl text-terracotta shadow-xl">
               Ensemble pour la vie
@@ -67,7 +67,7 @@ function Home() {
       {/* Compte à rebours */}
       <section
         className="relative overflow-hidden bg-navy bg-cover bg-center lg:bg-fixed px-6 py-16 sm:py-24 text-center text-navy-foreground"
-        style={{ backgroundImage: `url(${atWidth(gallery[4]!.src, 1200)})` }}
+        style={{ backgroundImage: `url(${atWidth(pagePhotos.countdown.src, 1200)})` }}
       >
         <div className="absolute inset-0 bg-navy/80" />
         <Reveal from="zoom" className="relative mx-auto max-w-3xl">
@@ -96,12 +96,14 @@ function Home() {
           <img
             {...responsive(storyPhotos[0]!.src, "(min-width: 448px) 300px, 66vw")}
             alt={storyPhotos[0]!.alt}
+            style={{ objectPosition: storyPhotos[0]!.position }}
             loading="lazy"
             className="absolute left-0 top-0 h-[78%] w-[66%] rounded-lg border-4 border-cream object-cover shadow-2xl transition duration-700 hover:z-10 hover:scale-105"
           />
           <img
             {...responsive(storyPhotos[1]!.src, "(min-width: 448px) 280px, 62vw")}
             alt={storyPhotos[1]!.alt}
+            style={{ objectPosition: storyPhotos[1]!.position }}
             loading="lazy"
             className="absolute bottom-0 right-0 h-[58%] w-[62%] rotate-3 rounded-lg border-4 border-cream object-cover shadow-2xl transition duration-700 hover:rotate-0 hover:scale-105"
           />

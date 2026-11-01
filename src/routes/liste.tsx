@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ExternalLink, Gift, MapPin, Store, Ticket } from "lucide-react";
+import { ExternalLink, Gift, MapPin, Phone, Store, Ticket } from "lucide-react";
 import { Divider, PageHeader, PendingNote } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
-import { registry, storyPhotos } from "@/content/wedding";
+import { pagePhotos, registry, storeMapsLink } from "@/content/wedding";
 
 export const Route = createFileRoute("/liste")({
   head: () => ({
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/liste")({
 function Registry() {
   return (
     <>
-      <PageHeader eyebrow="Avec gratitude" title="Liste de mariage" image={storyPhotos[1]} />
+      <PageHeader eyebrow="Avec gratitude" title="Liste de mariage" image={pagePhotos.liste} />
       <div className="mx-auto max-w-5xl px-6 py-20">
         <Reveal from="zoom" className="mx-auto max-w-2xl text-center">
           <span className="animate-heartbeat mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-terracotta shadow-lg shadow-terracotta/30">
@@ -32,7 +32,7 @@ function Registry() {
         <Reveal className="mt-14 text-center">
           <p className="text-xs uppercase tracking-[0.4em] text-terracotta">Première possibilité</p>
           <h2 className="font-script mt-2 text-5xl text-navy">Notre liste en magasin</h2>
-          <p className="mt-3 text-muted-foreground">Retrouvez notre liste dans l’une de ces trois enseignes.</p>
+          <p className="mt-3 text-muted-foreground">Retrouvez notre liste dans l’une de ces trois enseignes, à Douala ou à Yaoundé.</p>
         </Reveal>
         <div className="mt-8 grid gap-6 sm:grid-cols-3">
           {registry.stores.map((s, k) => (
@@ -49,17 +49,35 @@ function Registry() {
                     {s.address}
                   </p>
                 )}
-                {s.aConfirmer && <PendingNote>Enseigne bientôt annoncée</PendingNote>}
-                {s.url && (
-                  <a
-                    href={s.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-auto inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-navy-foreground shadow-md transition hover:-translate-y-0.5 hover:bg-terracotta"
-                  >
-                    Voir la liste <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                {s.phone && (
+                  <a href={`tel:${s.phone.replace(/\s/g, "")}`} className="mt-2 flex items-center gap-1.5 text-sm hover:text-terracotta">
+                    <Phone className="h-4 w-4 shrink-0 text-terracotta" aria-hidden />
+                    {s.phone}
                   </a>
                 )}
+                {s.aConfirmer && <PendingNote>Adresse bientôt communiquée</PendingNote>}
+                <div className="mt-auto flex flex-wrap justify-center gap-2 pt-5">
+                  {storeMapsLink(s) && (
+                    <a
+                      href={storeMapsLink(s)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-navy-foreground shadow-md transition hover:-translate-y-0.5 hover:bg-terracotta"
+                    >
+                      <MapPin className="h-3.5 w-3.5" aria-hidden /> Google Maps
+                    </a>
+                  )}
+                  {s.url && (
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-navy-foreground shadow-md transition hover:-translate-y-0.5 hover:bg-terracotta"
+                    >
+                      Voir la liste <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                    </a>
+                  )}
+                </div>
               </article>
             </Reveal>
           ))}
