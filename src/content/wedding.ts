@@ -33,7 +33,7 @@ export const preview = {
 
 export const credit = { label: "Model Technologie", url: "https://model-technologie.com" };
 
-/** Référencement : seule la page d'accueil publique (/acces) est indexée par les moteurs de recherche. */
+/** Référencement : seule la page d'accueil est indexée par les moteurs de recherche. */
 export const seo = {
   title: "Mariage de Thibaut & Sylviane — 20 & 21 novembre 2026 · Foumban",
   description:

@@ -1,9 +1,8 @@
 import { getCookie, setCookie, getRequestIP } from "@tanstack/react-start/server";
 
-/** Un accès protégé par mot de passe : invités (site) ou mariés (administration du livre d'or). */
+/** Accès protégé par mot de passe à l'administration du livre d'or. */
 type Gate = { cookie: string; secret: string; label: string; maxAge: number };
 
-export const SITE_GATE: Gate = { cookie: "ts_access", secret: "SITE_PASSWORD", label: "invite-access-v1", maxAge: 60 * 60 * 24 * 60 };
 export const ADMIN_GATE: Gate = { cookie: "ts_admin", secret: "ADMIN_PASSWORD", label: "admin-access-v1", maxAge: 60 * 60 * 12 };
 
 const MAX_ATTEMPTS = 5;

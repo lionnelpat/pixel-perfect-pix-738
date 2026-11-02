@@ -1,14 +1,13 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestIP } from "@tanstack/react-start/server";
 import { z } from "zod";
-import { ADMIN_GATE, hasAccess, SITE_GATE } from "./access.server";
+import { ADMIN_GATE, hasAccess } from "./access.server";
 import { newestFirst, readAll, readOne, readPublished, rebuildPublished, write, type GuestbookEntry, type GuestbookStatus, type PublicMessage } from "./guestbook.server";
 
 export type { GuestbookEntry, GuestbookStatus, PublicMessage };
 
 /** Messages validés, visibles par les invités. */
 export const listMessages = createServerFn({ method: "GET" }).handler(async () => {
-  if (!(await hasAccess(SITE_GATE))) return [] as PublicMessage[];
   return readPublished();
 });
 
@@ -29,7 +28,6 @@ export const postMessage = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    if (!(await hasAccess(SITE_GATE))) return { ok: false, error: "Votre session a expiré. Rechargez la page." };
     if (data.website) return { ok: true, error: null };
 
     const ip = getRequestIP({ xForwardedFor: true }) ?? "unknown";

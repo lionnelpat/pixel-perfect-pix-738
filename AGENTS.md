@@ -1,4 +1,4 @@
 - All wedding copy/data lives in `src/content/wedding.ts`; pages only render it (couple edits content in one place).
-- Site access is gated in `__root` beforeLoad via server fn `checkAccess` (HMAC cookie from `SITE_PASSWORD` secret); never gate client-side only.
+- Site is public (password gate removed 2026-11-02; `/acces` redirects to `/`). Only `/admin` is gated via server fn `checkAdmin` (HMAC cookie from `ADMIN_PASSWORD`); never gate client-side only.
 - Open content questions are tracked in `docs/DECISIONS_A_VALIDER.md`; never present unconfirmed info as fact.
 - Hosted on Netlify (Git-connected, `netlify.toml`); avoid rewriting published git history (no force push).

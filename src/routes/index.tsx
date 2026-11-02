@@ -8,18 +8,55 @@ import { Lightbox } from "@/components/site/Lightbox";
 import { FloralCorner, SectionTitle } from "@/components/site/Ornaments";
 import { PhotoCarousel } from "@/components/site/PhotoCarousel";
 import { Reveal } from "@/components/site/Reveal";
-import { couple, countdownTarget, dressCode, events, gallery, heroSlides, pagePhotos, story, storyPhotos, welcome } from "@/content/wedding";
+import { couple, countdownTarget, dressCode, events, gallery, heroSlides, pagePhotos, seo, story, storyPhotos, welcome } from "@/content/wedding";
 import { atWidth, responsive } from "@/lib/images";
+import { getSiteOrigin } from "@/lib/site-url";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Thibaut & Sylviane — Mariage 20 & 21 novembre 2026" },
-      { name: "description", content: "Bienvenue sur le site du mariage de Thibaut & Sylviane, à Njincha et Foumban." },
-      { property: "og:title", content: "Thibaut & Sylviane — Mariage" },
-      { property: "og:description", content: "Deux journées d’exception, les 20 et 21 novembre 2026." },
-    ],
-  }),
+  loader: () => ({ origin: getSiteOrigin() }),
+  head: ({ loaderData }) => {
+    const url = `${loaderData?.origin ?? ""}/`;
+    const image = `${loaderData?.origin ?? ""}${seo.shareImage}`;
+    return {
+      meta: [
+        { title: seo.title },
+        { name: "description", content: seo.description },
+        // Seule page indexable (les autres pages restent en noindex, voir __root).
+        { name: "robots", content: "index, follow, max-image-preview:large" },
+        { property: "og:title", content: `${couple.display.first} & ${couple.display.second} — 20 & 21 novembre 2026` },
+        { property: "og:description", content: seo.description },
+        { property: "og:url", content: url },
+        { property: "og:image", content: image },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        { property: "og:image:alt", content: seo.shareImageAlt },
+        { name: "twitter:image", content: image },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Event",
+            name: `Mariage de ${couple.display.first} & ${couple.display.second}`,
+            description: seo.description,
+            startDate: countdownTarget,
+            endDate: "2026-11-21T23:59:00+01:00",
+            eventStatus: "https://schema.org/EventScheduled",
+            eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+            image: [image],
+            url,
+            location: {
+              "@type": "Place",
+              name: seo.city,
+              address: { "@type": "PostalAddress", addressLocality: seo.city, addressCountry: seo.country },
+            },
+          }),
+        },
+      ],
+    };
+  },
   component: Home,
 });
 

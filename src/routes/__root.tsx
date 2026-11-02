@@ -4,8 +4,6 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  useRouterState,
-  redirect,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -14,7 +12,6 @@ import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import greatVibes from "@fontsource/great-vibes/files/great-vibes-latin-400-normal.woff2?url";
-import { checkAccess } from "../lib/access.functions";
 import { PreviewBanner, SiteFooter, SiteNav } from "../components/site/SiteNav";
 import { PageHeader } from "../components/site/Ornaments";
 
@@ -54,16 +51,11 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  beforeLoad: async ({ location }) => {
-    if (location.pathname === "/acces") return;
-    const { ok } = await checkAccess();
-    if (!ok) throw redirect({ to: "/acces" });
-  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      // Pages réservées aux invités : jamais indexées. La vitrine (/acces) remplace cette valeur.
+      // Pages intérieures non indexées ; l'accueil remplace cette valeur.
       { name: "robots", content: "noindex, nofollow" },
       { title: "Thibaut & Sylviane — 20 & 21 novembre 2026" },
       { name: "description", content: "Le site du mariage de Thibaut & Sylviane." },
@@ -105,15 +97,13 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const path = useRouterState({ select: (s) => s.location.pathname });
-  const gate = path === "/acces";
   return (
     <QueryClientProvider client={queryClient}>
-      {!gate && <SiteNav />}
+      <SiteNav />
       <main className="overflow-x-clip">
         <Outlet />
       </main>
-      {!gate && <SiteFooter />}
+      <SiteFooter />
       <PreviewBanner />
     </QueryClientProvider>
   );
