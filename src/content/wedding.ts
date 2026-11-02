@@ -162,13 +162,15 @@ export type GiftStore = {
   phone?: string;
   /** Recherche Google Maps (nom + ville) : ouvre la fiche de l'enseigne et ses magasins. */
   mapQuery?: string;
+  /** Lien Google Maps exact fourni par les mariés (prioritaire sur mapQuery). */
+  mapUrl?: string;
   /** Lien vers la liste en ligne de l'enseigne, s'il existe. */
   url?: string;
   aConfirmer?: boolean;
 };
 
 export function storeMapsLink(s: GiftStore) {
-  return s.mapQuery && `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.mapQuery)}`;
+  return s.mapUrl ?? (s.mapQuery && `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.mapQuery)}`);
 }
 
 export const registry = {
@@ -177,7 +179,7 @@ export const registry = {
   stores: [
     { name: "Supermarché Mahima", city: "Douala", mapQuery: "Supermarché Mahima Douala" },
     { name: "ORCA", city: "Douala", mapQuery: "ORCA Douala" },
-    { name: "PLACE", city: "Yaoundé", aConfirmer: true },
+    { name: "PLACE", city: "Yaoundé", mapUrl: "https://maps.app.goo.gl/XcnzLyc6mackQLuP6" },
   ] as GiftStore[],
   voucher: {
     title: "Le bon cadeau",

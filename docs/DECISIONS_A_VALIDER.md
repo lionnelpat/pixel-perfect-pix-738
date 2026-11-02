@@ -16,7 +16,7 @@ Tout le contenu se modifie dans `src/content/wedding.ts`.
 - Enfants : à quels événements ?
 - Dates clés pour une chronologie (rencontre famille 27/10/2022, etc.) — à valider avant affichage (données personnelles, enfants).
 - Liens cartographiques précis pour chaque lieu.
-- Liste de mariage : enseignes connues (Mahima et ORCA à Douala, PLACE à Yaoundé). Reste à confirmer : quel magasin pour Mahima (Akwa ou Bonamoussadi) et ORCA (Akwa rue Joffre ou Youpwè), leurs téléphones (les annuaires en ligne se contredisent), et l’adresse de PLACE (introuvable en ligne).
+- Liste de mariage : enseignes connues (Mahima et ORCA à Douala, PLACE à Yaoundé). Reste à confirmer : quel magasin pour Mahima (Akwa ou Bonamoussadi) et ORCA (Akwa rue Joffre ou Youpwè), leurs téléphones (les annuaires en ligne se contredisent). Adresse de PLACE fournie par les mariés (lien Google Maps, 2026-11-02).
 - Programme détaillé (annoncé par les mariés).
 - Soirée de gala : faut-il une restriction nominative sur le site ? Actuellement : mention « sur invitation ».
 
