@@ -10,7 +10,7 @@ export const navItems = [
   { to: "/programme", label: "Programme" },
   { to: "/lieux", label: "Lieux" },
   { to: "/dress-code", label: "Dress code" },
-  { to: "/infos", label: "Infos pratiques" },
+  { to: "/infos", label: "Souhaits des mariés" },
   { to: "/liste", label: "Liste de mariage" },
   { to: "/galerie", label: "Galerie" },
   { to: "/livre-dor", label: "Livre d’or" },

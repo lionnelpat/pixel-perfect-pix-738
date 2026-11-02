@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BedDouble, Car, Baby, Phone } from "lucide-react";
+import { BedDouble, Car, Baby, Clock, Phone } from "lucide-react";
 import { PageHeader, PendingNote } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
 import { events, practical } from "@/content/wedding";
@@ -7,9 +7,9 @@ import { events, practical } from "@/content/wedding";
 export const Route = createFileRoute("/infos")({
   head: () => ({
     meta: [
-      { title: "Infos pratiques — Thibaut & Sylviane" },
-      { name: "description", content: "Hébergement, stationnement et contact pour les invités." },
-      { property: "og:title", content: "Informations pratiques" },
+      { title: "Souhaits des mariés — Thibaut & Sylviane" },
+      { name: "description", content: "Respect du timing, hébergement, stationnement et contact pour les invités." },
+      { property: "og:title", content: "Souhaits des mariés" },
       { property: "og:description", content: "Tout pour préparer votre venue." },
     ],
   }),
@@ -31,8 +31,20 @@ function Block({ icon: Icon, title, children }: { icon: typeof Car; title: strin
 function Infos() {
   return (
     <>
-      <PageHeader eyebrow="Préparer votre venue" title="Infos pratiques" image={events[3]!.image} />
+      <PageHeader eyebrow="Préparer votre venue" title="Souhaits des mariés" image={events[3]!.image} />
       <div className="mx-auto grid max-w-4xl gap-6 px-6 py-20 sm:grid-cols-2">
+        <Reveal delay={0} className="sm:col-span-2">
+          <div className="card-elegant flex flex-col items-center gap-4 border-2 border-terracotta p-8 text-center sm:flex-row sm:text-left">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-terracotta ring-1 ring-gold/50">
+              <Clock className="h-7 w-7 text-cream" aria-hidden />
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">Très important</p>
+              <h2 className="mt-1 text-2xl font-semibold text-navy">{practical.timing.title}</h2>
+              <p className="mt-2 text-sm text-muted-foreground">{practical.timing.text}</p>
+            </div>
+          </div>
+        </Reveal>
         <Reveal delay={0}>
           <Block icon={BedDouble} title="Hébergement">
             {practical.accommodation.map((a) => (

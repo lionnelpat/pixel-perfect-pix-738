@@ -11,7 +11,7 @@ export const Route = createFileRoute("/histoire")({
       { title: "Notre histoire — Thibaut & Sylviane" },
       { name: "description", content: "Le récit de la rencontre de Thibaut et Sylviane." },
       { property: "og:title", content: "Notre histoire — Thibaut & Sylviane" },
-      { property: "og:description", content: "Tout a commencé le 18 septembre 2022, à Yaoundé." },
+      { property: "og:description", content: "Tout a commencé le 18 octobre 2022, à Yaoundé." },
     ],
   }),
   component: Story,

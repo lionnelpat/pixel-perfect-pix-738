@@ -56,7 +56,7 @@ export const welcome = [
 ];
 
 export const story = {
-  date: "18 septembre 2022",
+  date: "18 octobre 2022",
   paragraphs: [
     "Ce jour-là, j’accompagnais mes parents à l’église, à Yaoundé. À notre arrivée, à l’entrée du temple, nous avons aperçu celle qui allait devenir ma promise.",
     "Dans la voiture, personne n’a prononcé un mot, mais, au fond de moi, une conviction profonde venait de naître. Je me suis dit intérieurement : « Cette fille sera la femme de ma vie et la mère de mes enfants. »",
@@ -141,6 +141,11 @@ export const dressCode = {
 };
 
 export const practical = {
+  /** Souhait prioritaire du couple, mis en avant en tête de page. */
+  timing: {
+    title: "Respect du timing",
+    text: "C’est très important pour nous : merci d’arriver à l’heure à chaque étape de la célébration. Le programme est minuté, et votre ponctualité nous permettra de vivre pleinement chaque moment avec vous.",
+  },
   /** Mentionnés dans le 1er entretien, non reconfirmés. */
   accommodation: [{ name: "Complexe NJI Panka", note: "Hébergement suggéré", aConfirmer: true }],
   parking: { text: "Parking disponible sur place (complexe NJI Panka).", aConfirmer: true },
