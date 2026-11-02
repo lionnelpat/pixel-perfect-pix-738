@@ -62,7 +62,7 @@ export const Route = createFileRoute("/")({
 
 const shortcuts = [
   { to: "/lieux", label: "Lieux & itinéraires", icon: MapPin, image: events[1]!.image },
-  { to: "/dress-code", label: "Dress code", icon: Shirt, image: pagePhotos.looks[0]! },
+  { to: "/dress-code", label: "Dress code", icon: Shirt, image: pagePhotos.dressCode },
   { to: "/infos", label: "Souhaits des mariés", icon: Info, image: events[3]!.image },
   { to: "/liste", label: "Liste de mariage", icon: Gift, image: pagePhotos.liste },
 ] as const;

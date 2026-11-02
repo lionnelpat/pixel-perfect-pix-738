@@ -135,7 +135,7 @@ export const dressCode = {
   style: "Tenue de soirée",
   rules: [
     { title: "Union civile & bénédiction nuptiale", text: "Tenues confectionnées dans les tissus du mariage." },
-    { title: "Soirée de gala", text: "Tenues aux couleurs du mariage." },
+    { title: "Soirée de gala", text: "Tenues chic et glamour." },
   ],
   fabricNote: "Un tissu commun est prévu pour certains invités : rapprochez-vous des mariés pour les précisions.",
 };
@@ -233,8 +233,6 @@ export const pagePhotos = {
   histoire: photos.chic,
   programme: photos.blanc,
   dressCode: photos.pagneArche,
-  /** Inspirations tenues : les mariés eux-mêmes. */
-  looks: [photos.sylviane, photos.chic, photos.thibaut],
   liste: photos.bordeaux,
   galerie: photos.pagneArche,
   livreDor: photos.familleCanape,

@@ -3,7 +3,6 @@ import { Sparkles } from "lucide-react";
 import { PageHeader, PendingNote } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
 import { dressCode, pagePhotos } from "@/content/wedding";
-import { responsive } from "@/lib/images";
 
 export const Route = createFileRoute("/dress-code")({
   head: () => ({
@@ -16,9 +15,6 @@ export const Route = createFileRoute("/dress-code")({
   }),
   component: Dress,
 });
-
-/** Inspirations tenues (photos d'illustration). */
-const looks = pagePhotos.looks;
 
 function Dress() {
   return (
@@ -50,17 +46,6 @@ function Dress() {
             </Reveal>
           ))}
         </div>
-
-        <Reveal className="mt-16">
-          <p className="text-center text-xs uppercase tracking-[0.4em] text-terracotta">Inspirations</p>
-          <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-5">
-            {looks.map((p, k) => (
-              <div key={p.src} className={`group overflow-hidden rounded-lg shadow-lg ${k === 1 ? "sm:-translate-y-6" : ""}`}>
-                <img {...responsive(p.src, "33vw")} alt={p.alt} loading="lazy" decoding="async" style={{ objectPosition: p.position }} className="img-zoom aspect-[3/4] w-full object-cover" />
-              </div>
-            ))}
-          </div>
-        </Reveal>
 
         <Reveal className="mt-14">
           <p className="rounded-lg border border-gold/40 bg-secondary p-6 text-center font-serif text-lg">{dressCode.fabricNote}</p>
