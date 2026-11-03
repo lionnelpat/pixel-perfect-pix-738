@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ExternalLink, Gift, MapPin, Phone, Store, Ticket } from "lucide-react";
 import { Divider, PageHeader, PendingNote } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
-import { pagePhotos, registry, storeMapsLink } from "@/content/wedding";
+import { pagePhotos, practical, registry, storeMapsLink } from "@/content/wedding";
 
 export const Route = createFileRoute("/liste")({
   head: () => ({
@@ -20,29 +20,21 @@ function Registry() {
   return (
     <>
       <PageHeader eyebrow="Avec gratitude" title="Liste de mariage" image={pagePhotos.liste} />
-      <div className="mx-auto max-w-5xl px-6 py-20">
-        <Reveal from="zoom" className="mx-auto max-w-2xl text-center">
-          <span className="animate-heartbeat mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-terracotta shadow-lg shadow-terracotta/30">
-            <Gift className="h-8 w-8 text-cream" aria-hidden />
-          </span>
-          <p className="mt-6 font-serif text-2xl leading-relaxed">{registry.intro}</p>
-          <Divider className="mt-4" />
-        </Reveal>
-
-        <Reveal className="mt-14 text-center">
+      <div className="mx-auto max-w-5xl px-6 py-16">
+        <Reveal className="text-center">
           <p className="text-xs uppercase tracking-[0.4em] text-terracotta">Première possibilité</p>
-          <h2 className="font-script mt-2 text-5xl text-navy">Notre liste en magasin</h2>
-          <p className="mt-3 text-muted-foreground">Retrouvez notre liste dans l’une de ces trois enseignes, à Douala ou à Yaoundé.</p>
+          <h2 className="font-script mt-2 text-5xl text-navy sm:text-6xl">{registry.storesTitle}</h2>
+          <p className="mt-3 text-lg text-muted-foreground">{registry.storesText}</p>
         </Reveal>
         <div className="mt-8 grid gap-6 sm:grid-cols-3">
           {registry.stores.map((s, k) => (
             <Reveal key={s.name} delay={k * 120}>
-              <article className="card-elegant flex h-full flex-col items-center p-7 text-center transition duration-500 hover:-translate-y-1 hover:shadow-2xl">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-terracotta/10 ring-1 ring-gold/50">
-                  <Store className="h-6 w-6 text-terracotta" aria-hidden />
+              <article className="card-elegant flex h-full flex-col items-center p-7 text-center ring-2 ring-gold/60 shadow-xl transition duration-500 hover:-translate-y-1 hover:shadow-2xl">
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-terracotta shadow-lg shadow-terracotta/30">
+                  <Store className="h-7 w-7 text-cream" aria-hidden />
                 </span>
-                <h3 className="mt-4 text-2xl font-semibold text-navy">{s.name}</h3>
-                {s.city && <p className="mt-1 text-sm text-muted-foreground">{s.city}</p>}
+                <h3 className="mt-4 text-3xl font-semibold text-navy">{s.name}</h3>
+                {s.city && <p className="mt-1 text-sm font-semibold uppercase tracking-widest text-terracotta">{s.city}</p>}
                 {s.address && (
                   <p className="mt-2 flex items-start gap-1.5 text-sm">
                     <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-terracotta" aria-hidden />
@@ -83,7 +75,33 @@ function Registry() {
           ))}
         </div>
 
-        <Reveal className="mt-20">
+        {practical.contact.phone && (
+          <Reveal className="mt-12">
+            <section className="mx-auto flex max-w-2xl flex-col items-center gap-4 rounded-xl border-2 border-terracotta bg-terracotta/10 px-6 py-8 text-center shadow-lg">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-terracotta">
+                <Phone className="h-6 w-6 text-cream" aria-hidden />
+              </span>
+              <p className="font-serif text-lg">{registry.contactText}</p>
+              <p className="text-2xl font-semibold text-navy">{practical.contact.name}</p>
+              <a
+                href={`tel:${practical.contact.phone.replace(/\s/g, "")}`}
+                className="inline-flex items-center gap-2 rounded-full bg-terracotta px-7 py-3 text-lg font-semibold tracking-wide text-cream shadow-md transition hover:-translate-y-0.5 hover:bg-navy"
+              >
+                <Phone className="h-5 w-5" aria-hidden /> {practical.contact.phone}
+              </a>
+            </section>
+          </Reveal>
+        )}
+
+        <Reveal from="zoom" className="mx-auto mt-16 max-w-2xl text-center">
+          <span className="animate-heartbeat mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-terracotta shadow-lg shadow-terracotta/30">
+            <Gift className="h-8 w-8 text-cream" aria-hidden />
+          </span>
+          <p className="mt-6 font-serif text-2xl leading-relaxed">{registry.intro}</p>
+          <Divider className="mt-4" />
+        </Reveal>
+
+        <Reveal className="mt-12">
           <section className="relative overflow-hidden rounded-xl bg-navy px-8 py-12 text-center text-navy-foreground shadow-2xl sm:px-14">
             <Ticket className="mx-auto h-9 w-9 text-gold" aria-hidden />
             <p className="mt-3 text-xs uppercase tracking-[0.4em] text-gold">Deuxième possibilité</p>

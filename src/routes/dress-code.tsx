@@ -19,9 +19,7 @@ export const Route = createFileRoute("/dress-code")({
 function Dress() {
   return (
     <>
-      <PageHeader eyebrow="Élégance intemporelle" title="Dress code" image={pagePhotos.dressCode}>
-        <span className="inline-block rounded-full border border-gold/60 px-3 py-0.5 text-xs italic">Consignes en cours de confirmation par les mariés</span>
-      </PageHeader>
+      <PageHeader eyebrow="Élégance intemporelle" title="Dress code" image={pagePhotos.dressCode} />
       <div className="mx-auto max-w-5xl px-6 py-20">
         <div className="flex justify-center gap-6 sm:gap-14">
           {dressCode.colors.map((c, k) => (

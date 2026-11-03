@@ -12,7 +12,6 @@ Tout le contenu se modifie dans `src/content/wedding.ts`.
 ## À confirmer
 - Hébergement Complexe NJI Panka et parking (entretien 14/10 uniquement).
 - Dress code (tissus du mariage / couleurs / tissu commun : qui, comment se le procurer).
-- Publication du numéro de Gaelle Magnerou (non affiché tant que non validé).
 - Enfants : à quels événements ?
 - Dates clés pour une chronologie (rencontre famille 27/10/2022, etc.) — à valider avant affichage (données personnelles, enfants).
 - Liens cartographiques précis pour chaque lieu.
@@ -24,6 +23,8 @@ Tout le contenu se modifie dans `src/content/wedding.ts`.
 - Livre d'or : messages publics après validation par les mariés sur `/admin` (mot de passe `ADMIN_PASSWORD`). Aucun message n'est supprimé : on l'archive.
 - Photos du couple : 11 photos réparties (accueil, pages, galerie) le 01/11/2026. Les photos des lieux restent des illustrations.
 - Bandeau « version de travail » retiré pour la publication (01/11/2026).
+- Numéro de Gaelle Magnerou (+237 694 91 45 41) publié, mis en avant sur la liste de mariage (03/11/2026).
+- Dress code : mention « consignes en cours de confirmation » retirée de la page (03/11/2026).
 - Invitations numériques au gala (envoi e-mail/WhatsApp, suivi des confirmations) : abandonné par les mariés (17/10/2026).
 
 ## Non développé (en attente)

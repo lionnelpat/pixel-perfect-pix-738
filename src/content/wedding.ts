@@ -150,8 +150,8 @@ export const practical = {
   accommodation: [{ name: "Complexe NJI Panka", note: "Hébergement suggéré", aConfirmer: true }],
   parking: { text: "Parking disponible sur place (complexe NJI Panka).", aConfirmer: true },
   children: "Les enfants sont les bienvenus à certains événements seulement — précisions à venir.",
-  /** Ne mettre le numéro qu'après accord explicite pour publication. */
-  contact: { name: "Gaelle Magnerou", phone: null as string | null },
+  /** Numéro publié avec l'accord des mariés (2026-11-03). */
+  contact: { name: "Gaelle Magnerou", phone: "+237 694 91 45 41" as string | null },
 };
 
 export type GiftStore = {
@@ -175,6 +175,9 @@ export function storeMapsLink(s: GiftStore) {
 
 export const registry = {
   intro: "Votre présence est le plus précieux des cadeaux. Pour celles et ceux qui souhaitent nous gâter, deux possibilités s’offrent à vous.",
+  storesTitle: "Nos lieux de cadeaux",
+  storesText: "Retrouvez notre liste dans l’une de ces trois enseignes, à Douala ou à Yaoundé.",
+  contactText: "Pour toute question sur la liste de mariage ou les cadeaux, contactez :",
   /** Les 3 enseignes choisies par les mariés. Téléphones : non publiés tant que non vérifiés (voir docs/DECISIONS_A_VALIDER.md). */
   stores: [
     { name: "Supermarché Mahima", city: "Douala", mapQuery: "Supermarché Mahima Douala" },
