@@ -41,8 +41,7 @@ function Gallery() {
               <Reveal key={p.src + k} delay={(k % 3) * 120} className="mb-4 break-inside-avoid">
                 <button onClick={() => setI(k)} className="group relative block w-full overflow-hidden rounded-lg shadow-lg">
                   <img {...responsive(p.src, "(min-width: 640px) 33vw, 50vw")} alt={p.alt} loading="lazy" decoding="async" className="img-zoom w-full" />
-                  <span className="absolute inset-0 flex items-end justify-between bg-gradient-to-t from-navy/80 via-transparent to-transparent p-4 text-left text-navy-foreground opacity-0 transition duration-500 group-hover:opacity-100">
-                    <span className="font-serif text-lg italic">{p.alt}</span>
+                  <span className="absolute inset-0 flex items-end justify-end bg-gradient-to-t from-navy/80 via-transparent to-transparent p-4 text-navy-foreground opacity-0 transition duration-500 group-hover:opacity-100">
                     <Expand className="h-5 w-5 shrink-0 text-gold" aria-hidden />
                   </span>
                 </button>
