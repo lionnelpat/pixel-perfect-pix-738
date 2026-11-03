@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Sparkles } from "lucide-react";
-import { PageHeader, PendingNote } from "@/components/site/Ornaments";
+import { PageHeader } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
 import { dressCode, pagePhotos } from "@/content/wedding";
 
@@ -47,9 +47,6 @@ function Dress() {
 
         <Reveal className="mt-14">
           <p className="rounded-lg border border-gold/40 bg-secondary p-6 text-center font-serif text-lg">{dressCode.fabricNote}</p>
-          <div className="text-center">
-            <PendingNote>Détails du tissu commun à venir</PendingNote>
-          </div>
         </Reveal>
       </div>
     </>
