@@ -176,12 +176,11 @@ export function storeMapsLink(s: GiftStore) {
 export const registry = {
   intro: "Votre présence est le plus précieux des cadeaux. Pour celles et ceux qui souhaitent nous gâter, deux possibilités s’offrent à vous.",
   storesTitle: "Nos lieux de cadeaux",
-  storesText: "Retrouvez notre liste dans l’une de ces trois enseignes, à Douala ou à Yaoundé.",
+  storesText: "Retrouvez notre liste dans l’une de ces deux enseignes, à Douala ou à Yaoundé.",
   contactText: "Pour toute question sur la liste de mariage ou les cadeaux, contactez :",
-  /** Les 3 enseignes choisies par les mariés. Téléphones : non publiés tant que non vérifiés (voir docs/DECISIONS_A_VALIDER.md). */
+  /** Les 2 enseignes choisies par les mariés. Téléphones : non publiés tant que non vérifiés (voir docs/DECISIONS_A_VALIDER.md). */
   stores: [
     { name: "Supermarché Mahima", city: "Douala", mapQuery: "Supermarché Mahima Douala" },
-    { name: "ORCA", city: "Douala", mapQuery: "ORCA Douala" },
     { name: "PLACE", city: "Yaoundé", mapUrl: "https://maps.app.goo.gl/XcnzLyc6mackQLuP6" },
   ] as GiftStore[],
   voucher: {

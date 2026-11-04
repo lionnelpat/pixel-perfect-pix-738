@@ -21,12 +21,20 @@ function Registry() {
     <>
       <PageHeader eyebrow="Avec gratitude" title="Liste de mariage" image={pagePhotos.liste} />
       <div className="mx-auto max-w-5xl px-6 py-16">
+        <Reveal from="zoom" className="mx-auto mb-14 max-w-2xl text-center">
+          <span className="animate-heartbeat mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-terracotta shadow-lg shadow-terracotta/30">
+            <Gift className="h-8 w-8 text-cream" aria-hidden />
+          </span>
+          <p className="mt-6 font-serif text-2xl leading-relaxed">{registry.intro}</p>
+          <Divider className="mt-4" />
+        </Reveal>
+
         <Reveal className="text-center">
           <p className="text-xs uppercase tracking-[0.4em] text-terracotta">Première possibilité</p>
           <h2 className="font-script mt-2 text-5xl text-navy sm:text-6xl">{registry.storesTitle}</h2>
           <p className="mt-3 text-lg text-muted-foreground">{registry.storesText}</p>
         </Reveal>
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
+        <div className="mx-auto mt-8 grid max-w-3xl gap-6 sm:grid-cols-2">
           {registry.stores.map((s, k) => (
             <Reveal key={s.name} delay={k * 120}>
               <article className="card-elegant flex h-full flex-col items-center p-7 text-center ring-2 ring-gold/60 shadow-xl transition duration-500 hover:-translate-y-1 hover:shadow-2xl">
@@ -93,15 +101,7 @@ function Registry() {
           </Reveal>
         )}
 
-        <Reveal from="zoom" className="mx-auto mt-16 max-w-2xl text-center">
-          <span className="animate-heartbeat mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-terracotta shadow-lg shadow-terracotta/30">
-            <Gift className="h-8 w-8 text-cream" aria-hidden />
-          </span>
-          <p className="mt-6 font-serif text-2xl leading-relaxed">{registry.intro}</p>
-          <Divider className="mt-4" />
-        </Reveal>
-
-        <Reveal className="mt-12">
+        <Reveal className="mt-16">
           <section className="relative overflow-hidden rounded-xl bg-navy px-8 py-12 text-center text-navy-foreground shadow-2xl sm:px-14">
             <Ticket className="mx-auto h-9 w-9 text-gold" aria-hidden />
             <p className="mt-3 text-xs uppercase tracking-[0.4em] text-gold">Deuxième possibilité</p>
