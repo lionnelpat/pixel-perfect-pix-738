@@ -69,12 +69,16 @@ function Infos() {
         </Reveal>
         <Reveal delay={300}>
           <Block icon={Phone} title="Une question ?">
-            <p>Contact : <span className="font-semibold text-foreground">{practical.contact.name}</span></p>
-            {practical.contact.phone ? (
-              <a href={`tel:${practical.contact.phone}`} className="text-terracotta underline">{practical.contact.phone}</a>
-            ) : (
-              <p className="mt-1">Coordonnées communiquées prochainement.</p>
-            )}
+            <p>Personnes à contacter :</p>
+            <ul className="mt-2 space-y-2">
+              {practical.contacts.map((c) => (
+                <li key={c.phone}>
+                  <span className="font-semibold text-foreground">{c.name}</span>
+                  <br />
+                  <a href={`tel:${c.phone.replace(/\s/g, "")}`} className="text-terracotta underline">{c.phone}</a>
+                </li>
+              ))}
+            </ul>
           </Block>
         </Reveal>
       </div>

@@ -83,20 +83,26 @@ function Registry() {
           ))}
         </div>
 
-        {practical.contact.phone && (
+        {practical.contacts.length > 0 && (
           <Reveal className="mt-12">
             <section className="mx-auto flex max-w-2xl flex-col items-center gap-4 rounded-xl border-2 border-terracotta bg-terracotta/10 px-6 py-8 text-center shadow-lg">
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-terracotta">
                 <Phone className="h-6 w-6 text-cream" aria-hidden />
               </span>
               <p className="font-serif text-lg">{registry.contactText}</p>
-              <p className="text-2xl font-semibold text-navy">{practical.contact.name}</p>
-              <a
-                href={`tel:${practical.contact.phone.replace(/\s/g, "")}`}
-                className="inline-flex items-center gap-2 rounded-full bg-terracotta px-7 py-3 text-lg font-semibold tracking-wide text-cream shadow-md transition hover:-translate-y-0.5 hover:bg-navy"
-              >
-                <Phone className="h-5 w-5" aria-hidden /> {practical.contact.phone}
-              </a>
+              <ul className="flex w-full flex-col items-center gap-5">
+                {practical.contacts.map((c) => (
+                  <li key={c.phone} className="flex flex-col items-center gap-2">
+                    <p className="text-2xl font-semibold text-navy">{c.name}</p>
+                    <a
+                      href={`tel:${c.phone.replace(/\s/g, "")}`}
+                      className="inline-flex items-center gap-2 rounded-full bg-terracotta px-7 py-3 text-lg font-semibold tracking-wide text-cream shadow-md transition hover:-translate-y-0.5 hover:bg-navy"
+                    >
+                      <Phone className="h-5 w-5" aria-hidden /> {c.phone}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </section>
           </Reveal>
         )}

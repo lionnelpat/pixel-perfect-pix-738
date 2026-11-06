@@ -150,8 +150,12 @@ export const practical = {
   accommodation: [{ name: "Complexe NJI Panka", note: "Hébergement suggéré", aConfirmer: true }],
   parking: { text: "Parking disponible sur place (complexe NJI Panka).", aConfirmer: true },
   children: "Les enfants sont les bienvenus à certains événements seulement — précisions à venir.",
-  /** Numéro publié avec l'accord des mariés (2026-11-03). */
-  contact: { name: "Gaelle Magnerou", phone: "+237 694 91 45 41" as string | null },
+  /** Personnes à contacter, dans l'ordre voulu par les mariés (2026-11-06). */
+  contacts: [
+    { name: "Gilles Thibaut NJUTAPVOUI", phone: "+237 698 92 32 18" },
+    { name: "Sylviane MFAGAM", phone: "+237 698 46 75 28" },
+    { name: "Gaelle Natacha MAGNEROU", phone: "+237 694 91 45 41" },
+  ] as { name: string; phone: string }[],
 };
 
 export type GiftStore = {
@@ -180,7 +184,12 @@ export const registry = {
   contactText: "Pour toute question sur la liste de mariage ou les cadeaux, contactez :",
   /** Les 2 enseignes choisies par les mariés. Téléphones : non publiés tant que non vérifiés (voir docs/DECISIONS_A_VALIDER.md). */
   stores: [
-    { name: "Supermarché Mahima", city: "Douala", mapQuery: "Supermarché Mahima Douala" },
+    {
+      name: "MAHIMA Électroménager",
+      city: "Akwa · Douala",
+      address: "Attention : deux enseignes MAHIMA se trouvent au même endroit. Rendez-vous chez MAHIMA Électroménager, et non à MAHIMA Grande Surface.",
+      mapQuery: "Mahima Électroménager Akwa Douala",
+    },
     { name: "PLACE", city: "Yaoundé", mapUrl: "https://maps.app.goo.gl/XcnzLyc6mackQLuP6" },
   ] as GiftStore[],
   voucher: {
