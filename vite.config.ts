@@ -20,6 +20,8 @@ export default defineConfig({
       prerender: {
         enabled: true,
         crawlLinks: true,
+        // /programme.html plutôt que /programme/index.html : servi sans redirection vers « /programme/ ».
+        autoSubfolderIndex: false,
         failOnError: true,
         filter: ({ path }) => !["/livre-dor", "/admin", "/acces"].some((p) => path.startsWith(p)),
       },
