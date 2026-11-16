@@ -104,7 +104,7 @@ function Home() {
       {/* Compte à rebours */}
       <section
         className="relative overflow-hidden bg-navy bg-cover bg-center lg:bg-fixed px-6 py-16 sm:py-24 text-center text-navy-foreground"
-        style={{ backgroundImage: `url(${atWidth(pagePhotos.countdown.src, 1200)})` }}
+        style={{ backgroundImage: `url(${atWidth(pagePhotos.countdown.src, 720)})` }}
       >
         <div className="absolute inset-0 bg-navy/80" />
         <Reveal from="zoom" className="relative mx-auto max-w-3xl">

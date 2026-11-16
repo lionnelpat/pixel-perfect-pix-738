@@ -18,6 +18,12 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // Le script est arrivé après le délai de secours (connexion lente) : le contenu est déjà affiché, on le laisse.
+    if (getComputedStyle(el).opacity !== "0") {
+      el.classList.add("is-visible");
+      return;
+    }
+    el.classList.add("is-armed");
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {

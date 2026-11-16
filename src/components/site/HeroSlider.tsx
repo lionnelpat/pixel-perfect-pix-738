@@ -7,16 +7,23 @@ import { responsive } from "@/lib/images";
 import { Petals } from "./Petals";
 
 const DELAY = 6500;
+/** Délai avant de télécharger la photo suivante : la première s'affiche d'abord (connexions lentes). */
+const PRELOAD_NEXT = 3500;
+/** Sur téléphone, une image plus légère suffit : elle est assombrie par le voile bleu nuit. */
+const HERO_SIZES = "(min-width: 768px) 100vw, 60vw";
 
 export function HeroSlider({ slides }: { slides: Photo[] }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [seen, setSeen] = useState(() => new Set([0, 1]));
+  const [seen, setSeen] = useState(() => new Set([0]));
   const n = slides.length;
   const go = useCallback((d: number) => setI((c) => (c + d + n) % n), [n]);
 
   useEffect(() => {
-    setSeen((s) => (s.has(i) && s.has((i + 1) % n) ? s : new Set([...s, i, (i + 1) % n])));
+    setSeen((s) => (s.has(i) ? s : new Set([...s, i])));
+    const next = (i + 1) % n;
+    const id = setTimeout(() => setSeen((s) => (s.has(next) ? s : new Set([...s, next]))), PRELOAD_NEXT);
+    return () => clearTimeout(id);
   }, [i, n]);
 
   useEffect(() => {
@@ -43,7 +50,7 @@ export function HeroSlider({ slides }: { slides: Photo[] }) {
           {seen.has(k) && (
             <img
               key={k === i ? `on-${i}` : "off"}
-              {...responsive(s.src, "100vw")}
+              {...responsive(s.src, HERO_SIZES)}
               alt={s.alt}
               style={{ objectPosition: s.position }}
               className={`h-full w-full object-cover ${k === i ? "ken-burns" : ""}`}

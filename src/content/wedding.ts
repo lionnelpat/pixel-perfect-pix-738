@@ -13,11 +13,6 @@ export type Photo = {
   position?: string;
 };
 
-/** Image Unsplash (licence libre) redimensionnée. */
-function unsplash(id: string, w = 1600) {
-  return `https://images.unsplash.com/photo-${id}?w=${w}&q=75&auto=format&fit=crop`;
-}
-
 export const couple = {
   display: { first: "Thibaut", second: "Sylviane" },
   bride: "Sylviane Flore",
@@ -91,7 +86,7 @@ export const events: WeddingEvent[] = [
     title: "Cérémonie traditionnelle (dot)",
     place: "Njincha, par Foumbot",
     mapQuery: "Njincha, Foumbot, Cameroun",
-    image: { src: unsplash("1770562325818-45c1f4cd2a84"), alt: "Case traditionnelle entourée de bananiers", placeholder: true },
+    image: { src: "/photos/illustration-case.jpg", alt: "Case traditionnelle entourée de bananiers", placeholder: true },
   },
   {
     id: "civil",
@@ -101,7 +96,7 @@ export const events: WeddingEvent[] = [
     place: "Lac municipal de Foumban",
     aConfirmer: true,
     mapQuery: "Lac municipal de Foumban, Cameroun",
-    image: { src: unsplash("1785081088443-8bb3657d4992"), alt: "Lac bordé de palmiers", placeholder: true },
+    image: { src: "/photos/illustration-lac.jpg", alt: "Lac bordé de palmiers", placeholder: true },
   },
   {
     id: "religieux",
@@ -112,7 +107,7 @@ export const events: WeddingEvent[] = [
     placeDetail: "Sise au lac municipal de Foumban",
     aConfirmer: true,
     mapQuery: "Paroisse EECD Lac Jourdain, Foumban, Cameroun",
-    image: { src: unsplash("1788550439605-8793f4c528d4"), alt: "Allée centrale d’une église lumineuse", placeholder: true },
+    image: { src: "/photos/illustration-eglise.jpg", alt: "Allée centrale d’une église lumineuse", placeholder: true },
   },
   {
     id: "gala",
@@ -122,7 +117,7 @@ export const events: WeddingEvent[] = [
     place: "Complexe NJI Panka",
     restricted: true,
     mapQuery: "Complexe NJI Panka, Foumban, Cameroun",
-    image: { src: unsplash("1783314863884-be035ed5ed5c"), alt: "Salle de réception aux lumières chaudes", placeholder: true },
+    image: { src: "/photos/illustration-salle.jpg", alt: "Salle de réception aux lumières chaudes", placeholder: true },
   },
 ];
 
@@ -217,11 +212,12 @@ export function mapsEmbed(e: WeddingEvent) {
 
 /**
  * Photos des mariés, dans public/photos/.
- * Pour en ajouter une : déposer le fichier (nom sans espaces), la déclarer ici, puis l'ajouter à `gallery`.
+ * Pour en ajouter une : déposer le fichier (nom sans espaces), lancer `npm run photos` (versions allégées
+ * pour téléphone, fichier renommé en .jpg), la déclarer ici, puis l'ajouter à `gallery`.
  */
 const photos = {
-  blanc: { src: "/photos/accueil-2.png", alt: "Thibaut et Sylviane, tout de blanc vêtus", position: "50% 20%" },
-  bordeaux: { src: "/photos/accueil-1.png", alt: "Sylviane en robe bordeaux, Thibaut en costume bleu", position: "50% 15%" },
+  blanc: { src: "/photos/accueil-2.jpg", alt: "Thibaut et Sylviane, tout de blanc vêtus", position: "50% 20%" },
+  bordeaux: { src: "/photos/accueil-1.jpg", alt: "Sylviane en robe bordeaux, Thibaut en costume bleu", position: "50% 15%" },
   pagneArche: { src: "/photos/couple-pagne-arche.jpg", alt: "Thibaut et Sylviane enlacés, en pagne, sous une arche fleurie", position: "50% 18%" },
   pagneFleurs: { src: "/photos/couple-pagne-fleurs.jpg", alt: "Thibaut et Sylviane en pagne, devant un décor de fleurs blanches", position: "50% 18%" },
   chic: { src: "/photos/couple-chic.jpg", alt: "Sylviane en robe verte au bras de Thibaut", position: "50% 15%" },
@@ -230,7 +226,7 @@ const photos = {
   thibaut: { src: "/photos/thibaut-costume.jpg", alt: "Thibaut en costume bleu et gris", position: "50% 15%" },
   sylviane: { src: "/photos/sylviane-robe-rouge.jpg", alt: "Sylviane en robe rouge", position: "50% 15%" },
   familleSalon: { src: "/photos/famille-salon.jpg", alt: "Thibaut et Sylviane en famille dans le salon", position: "50% 40%" },
-  familleCanape: { src: "/photos/galerie-01.png", alt: "Thibaut et Sylviane en famille sur le canapé", position: "50% 25%" },
+  familleCanape: { src: "/photos/galerie-01.jpg", alt: "Thibaut et Sylviane en famille sur le canapé", position: "50% 25%" },
 } satisfies Record<string, Photo>;
 
 /** Diaporama plein écran de l'accueil (3 à 6 photos, format paysage ou portrait). */
