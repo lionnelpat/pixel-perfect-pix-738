@@ -4,9 +4,10 @@ import type { ReactNode } from "react";
 import { heroSlides, type Photo } from "@/content/wedding";
 import { Reveal } from "./Reveal";
 import { responsive } from "@/lib/images";
+import { useAfterLoad } from "@/hooks/use-deferred-media";
 
 export function Divider({ className = "" }: { className?: string }) {
-  return <img src={divider} alt="" aria-hidden width={512} height={171} className={`mx-auto h-10 w-64 object-cover ${className}`} />;
+  return <img src={divider} alt="" aria-hidden width={512} height={171} loading="lazy" decoding="async" className={`mx-auto h-10 w-64 object-cover ${className}`} />;
 }
 
 export function FloralCorner({ position }: { position: "tl" | "br" }) {
@@ -38,9 +39,15 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   const bg = image ?? heroSlides[0]!;
+  // Titre d'abord sur fond bleu nuit, photo une fois la page chargée (connexions lentes).
+  const loaded = useAfterLoad();
   return (
     <header className="relative flex min-h-[52svh] items-end justify-center overflow-hidden bg-navy pb-14 pt-32 text-center text-navy-foreground">
-      <img {...responsive(bg.src, "(min-width: 768px) 100vw, 60vw")} alt="" aria-hidden fetchPriority="high" style={{ objectPosition: bg.position }} className="ken-burns absolute inset-0 h-full w-full object-cover" />
+      {loaded && (
+        <div className="media-fade absolute inset-0">
+          <img {...responsive(bg.src, "(min-width: 768px) 100vw, 60vw")} alt="" aria-hidden decoding="async" style={{ objectPosition: bg.position }} className="ken-burns h-full w-full object-cover" />
+        </div>
+      )}
       <div className="overlay-navy absolute inset-0" />
       <div className="relative mx-auto max-w-2xl px-6">
         <p className="fade-up text-xs uppercase tracking-[0.4em] text-gold">{eyebrow}</p>

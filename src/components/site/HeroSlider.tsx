@@ -3,6 +3,7 @@ import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import type { Photo } from "@/content/wedding";
 import { couple } from "@/content/wedding";
+import { useAfterLoad } from "@/hooks/use-deferred-media";
 import { responsive } from "@/lib/images";
 import { Petals } from "./Petals";
 
@@ -16,15 +17,18 @@ export function HeroSlider({ slides }: { slides: Photo[] }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
   const [seen, setSeen] = useState(() => new Set([0]));
+  // Le titre s'affiche sur fond bleu nuit ; la photo n'est téléchargée qu'une fois la page chargée.
+  const loaded = useAfterLoad();
   const n = slides.length;
   const go = useCallback((d: number) => setI((c) => (c + d + n) % n), [n]);
 
   useEffect(() => {
     setSeen((s) => (s.has(i) ? s : new Set([...s, i])));
+    if (!loaded) return;
     const next = (i + 1) % n;
     const id = setTimeout(() => setSeen((s) => (s.has(next) ? s : new Set([...s, next]))), PRELOAD_NEXT);
     return () => clearTimeout(id);
-  }, [i, n]);
+  }, [i, n, loaded]);
 
   useEffect(() => {
     if (paused || n < 2) return;
@@ -47,16 +51,17 @@ export function HeroSlider({ slides }: { slides: Photo[] }) {
           style={{ opacity: k === i ? 1 : 0 }}
           aria-hidden={k !== i}
         >
-          {seen.has(k) && (
-            <img
-              key={k === i ? `on-${i}` : "off"}
-              {...responsive(s.src, HERO_SIZES)}
-              alt={s.alt}
-              style={{ objectPosition: s.position }}
-              className={`h-full w-full object-cover ${k === i ? "ken-burns" : ""}`}
-              fetchPriority={k === 0 ? "high" : "low"}
-              decoding={k === 0 ? "sync" : "async"}
-            />
+          {loaded && seen.has(k) && (
+            <div className="media-fade h-full w-full">
+              <img
+                key={k === i ? `on-${i}` : "off"}
+                {...responsive(s.src, HERO_SIZES)}
+                alt={s.alt}
+                style={{ objectPosition: s.position }}
+                className={`h-full w-full object-cover ${k === i ? "ken-burns" : ""}`}
+                decoding="async"
+              />
+            </div>
           )}
         </div>
       ))}

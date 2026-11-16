@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Gift, Info, MapPin, Shirt } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Countdown } from "@/components/site/Countdown";
 import { EventCard, EventLine } from "@/components/site/EventCard";
 import { HeroSlider } from "@/components/site/HeroSlider";
@@ -9,6 +9,7 @@ import { FloralCorner, SectionTitle } from "@/components/site/Ornaments";
 import { PhotoCarousel } from "@/components/site/PhotoCarousel";
 import { Reveal } from "@/components/site/Reveal";
 import { couple, countdownTarget, dressCode, events, gallery, heroSlides, pagePhotos, seo, story, storyPhotos, welcome } from "@/content/wedding";
+import { useNearViewport } from "@/hooks/use-deferred-media";
 import { atWidth, responsive } from "@/lib/images";
 import { getSiteOrigin } from "@/lib/site-url";
 
@@ -69,6 +70,8 @@ const shortcuts = [
 
 function Home() {
   const [open, setOpen] = useState<number | null>(null);
+  const countdownRef = useRef<HTMLElement>(null);
+  const countdownNear = useNearViewport(countdownRef);
   return (
     <>
       <HeroSlider slides={heroSlides} />
@@ -103,8 +106,10 @@ function Home() {
 
       {/* Compte à rebours */}
       <section
+        ref={countdownRef}
         className="relative overflow-hidden bg-navy bg-cover bg-center lg:bg-fixed px-6 py-16 sm:py-24 text-center text-navy-foreground"
-        style={{ backgroundImage: `url(${atWidth(pagePhotos.countdown.src, 720)})` }}
+        // Image de fond CSS : `loading="lazy"` ne s'applique pas, on attend que la section approche de l'écran.
+        style={countdownNear ? { backgroundImage: `url(${atWidth(pagePhotos.countdown.src, 720)})` } : undefined}
       >
         <div className="absolute inset-0 bg-navy/80" />
         <Reveal from="zoom" className="relative mx-auto max-w-3xl">

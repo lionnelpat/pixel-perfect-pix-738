@@ -156,6 +156,20 @@
   }
 }
 
+/* Photo chargée après le texte : apparition douce au lieu d'un affichage brusque. */
+@utility media-fade {
+  animation: media-fade 1.2s ease-out both;
+}
+
+@keyframes media-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @utility ken-burns {
   animation: ken-burns 9s ease-out both;
 }
