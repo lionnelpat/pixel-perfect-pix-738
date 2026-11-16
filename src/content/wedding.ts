@@ -260,3 +260,6 @@ export const gallery: Photo[] = [
   photos.alliances,
   photos.familleCanape,
 ];
+
+/** Carrousel de l'accueil : quelques photos seulement (connexions lentes) ; toutes sont dans la page Galerie. */
+export const homeGallery: Photo[] = gallery.slice(0, 5);

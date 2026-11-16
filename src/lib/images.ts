@@ -13,7 +13,9 @@ export function atWidth(src: string, width: number) {
 
 /**
  * Attributs <img> responsives : le téléphone télécharge une image à sa taille au lieu de la version complète.
- * `sizes` : largeur d'affichage de l'image selon l'écran (syntaxe HTML).
+ * `sizes` : largeur d'affichage de l'image selon l'écran (syntaxe HTML). Sur téléphone (dernier terme), déclarer
+ * environ la moitié de la largeur réelle : les écrans haute densité (×3) réclameraient sinon la version complète,
+ * trois à quatre fois plus lourde, pour un gain de netteté imperceptible.
  */
 export function responsive(src: string, sizes: string) {
   if (!OPTIMIZED.has(src)) return { src };

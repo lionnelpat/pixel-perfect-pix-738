@@ -50,7 +50,7 @@ export function PhotoCarousel({ photos, onOpen }: { photos: Photo[]; onOpen?: (i
                 }`}
                 aria-label={p.alt}
               >
-                <img {...responsive(p.src, "(min-width: 1024px) 32vw, (min-width: 640px) 45vw, 78vw")} alt={p.alt} loading="lazy" decoding="async" style={{ objectPosition: p.position }} className="img-zoom aspect-[3/4] w-full object-cover" />
+                <img {...responsive(p.src, "(min-width: 1024px) 32vw, (min-width: 640px) 45vw, 37vw")} alt={p.alt} loading="lazy" decoding="async" style={{ objectPosition: p.position }} className="img-zoom aspect-[3/4] w-full object-cover" />
               </button>
             </div>
           ))}

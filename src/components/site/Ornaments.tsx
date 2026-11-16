@@ -45,7 +45,7 @@ export function PageHeader({
     <header className="relative flex min-h-[52svh] items-end justify-center overflow-hidden bg-navy pb-14 pt-32 text-center text-navy-foreground">
       {loaded && (
         <div className="media-fade absolute inset-0">
-          <img {...responsive(bg.src, "(min-width: 768px) 100vw, 60vw")} alt="" aria-hidden decoding="async" style={{ objectPosition: bg.position }} className="ken-burns h-full w-full object-cover" />
+          <img {...responsive(bg.src, "(min-width: 768px) 100vw, 37vw")} alt="" aria-hidden decoding="async" style={{ objectPosition: bg.position }} className="ken-burns h-full w-full object-cover" />
         </div>
       )}
       <div className="overlay-navy absolute inset-0" />
