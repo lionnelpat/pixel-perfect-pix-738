@@ -31,6 +31,8 @@ export function useNearViewport(ref: RefObject<Element | null>, rootMargin = "30
   useEffect(() => {
     const el = ref.current;
     if (!el || near) return;
+    // Page de test « sans photos » (adresse terminée par ?sansphotos=1) : seules les photos du diaporama d'accueil sont chargées.
+    if (new URLSearchParams(window.location.search).has("sansphotos")) return;
     if (!("IntersectionObserver" in window)) {
       setNear(true);
       return;
