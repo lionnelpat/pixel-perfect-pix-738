@@ -229,8 +229,8 @@ const photos = {
   familleCanape: { src: "/photos/galerie-01.jpg", alt: "Thibaut et Sylviane en famille sur le canapé", position: "50% 25%" },
 } satisfies Record<string, Photo>;
 
-/** Diaporama plein écran de l'accueil (3 à 6 photos, format paysage ou portrait). */
-export const heroSlides: Photo[] = [photos.pagneArche, photos.blanc, photos.chic, photos.bordeaux];
+/** Diaporama plein écran de l'accueil : 2 photos seulement, chacune étant téléchargée par tous les visiteurs. */
+export const heroSlides: Photo[] = [photos.pagneArche, photos.blanc];
 
 /** Photos de la section « Notre histoire » (accueil et page Notre histoire, une par paragraphe). */
 export const storyPhotos: Photo[] = [photos.canape, photos.alliances, photos.pagneFleurs];

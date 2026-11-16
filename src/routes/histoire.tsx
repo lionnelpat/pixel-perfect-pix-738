@@ -3,7 +3,7 @@ import { Heart } from "lucide-react";
 import { Divider, PageHeader } from "@/components/site/Ornaments";
 import { Reveal } from "@/components/site/Reveal";
 import { pagePhotos, story, storyPhotos } from "@/content/wedding";
-import { responsive } from "@/lib/images";
+import { LazyPhoto } from "@/components/site/LazyPhoto";
 
 export const Route = createFileRoute("/histoire")({
   head: () => ({
@@ -41,7 +41,7 @@ function Story() {
                 </span>
                 <Reveal from={even ? "left" : "right"} className={even ? "" : "md:order-2"}>
                   <div className="group overflow-hidden rounded-lg border-4 border-cream shadow-2xl">
-                    <img {...responsive(photo.src, "(min-width: 768px) 50vw, 37vw")} alt={photo.alt} loading="lazy" decoding="async" style={{ objectPosition: photo.position }} className="img-zoom aspect-[4/5] w-full object-cover" />
+                    <LazyPhoto src={photo.src} sizes="(min-width: 768px) 50vw, 37vw" alt={photo.alt} style={{ objectPosition: photo.position }} className="img-zoom aspect-[4/5] w-full object-cover" />
                   </div>
                 </Reveal>
                 <Reveal from={even ? "right" : "left"}>

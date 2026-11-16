@@ -10,8 +10,9 @@ import { PhotoCarousel } from "@/components/site/PhotoCarousel";
 import { Reveal } from "@/components/site/Reveal";
 import { couple, countdownTarget, dressCode, events, heroSlides, homeGallery, pagePhotos, seo, story, storyPhotos, welcome } from "@/content/wedding";
 import { useNearViewport } from "@/hooks/use-deferred-media";
-import { atWidth, responsive } from "@/lib/images";
+import { atWidth } from "@/lib/images";
 import { getSiteOrigin } from "@/lib/site-url";
+import { LazyPhoto } from "@/components/site/LazyPhoto";
 
 export const Route = createFileRoute("/")({
   loader: () => ({ origin: getSiteOrigin() }),
@@ -83,7 +84,7 @@ function Home() {
           <Reveal from="left" className="relative mx-auto w-full max-w-sm">
             <div className="animate-spin-slow absolute -inset-6 rounded-full border border-dashed border-gold/50" aria-hidden />
             <div className="arch-frame relative overflow-hidden">
-              <img {...responsive(pagePhotos.welcome.src, "(min-width: 640px) 384px, 37vw")} alt={pagePhotos.welcome.alt} loading="lazy" decoding="async" style={{ objectPosition: pagePhotos.welcome.position }} className="aspect-[3/4] w-full object-cover" />
+              <LazyPhoto src={pagePhotos.welcome.src} sizes="(min-width: 640px) 384px, 37vw" alt={pagePhotos.welcome.alt} style={{ objectPosition: pagePhotos.welcome.position }} className="aspect-[3/4] w-full object-cover" />
             </div>
             <p className="font-script absolute -bottom-6 -right-4 rotate-[-6deg] rounded-lg bg-cream px-5 py-2 text-3xl text-terracotta shadow-xl">
               Ensemble pour la vie
@@ -135,18 +136,16 @@ function Home() {
           </Link>
         </Reveal>
         <Reveal from="right" className="relative order-1 mx-auto h-[440px] w-full max-w-md lg:order-2">
-          <img
-            {...responsive(storyPhotos[0]!.src, "(min-width: 640px) 300px, 33vw")}
+          <LazyPhoto
+            src={storyPhotos[0]!.src} sizes="(min-width: 640px) 300px, 33vw"
             alt={storyPhotos[0]!.alt}
             style={{ objectPosition: storyPhotos[0]!.position }}
-            loading="lazy"
             className="absolute left-0 top-0 h-[78%] w-[66%] rounded-lg border-4 border-cream object-cover shadow-2xl transition duration-700 hover:z-10 hover:scale-105"
           />
-          <img
-            {...responsive(storyPhotos[1]!.src, "(min-width: 640px) 280px, 31vw")}
+          <LazyPhoto
+            src={storyPhotos[1]!.src} sizes="(min-width: 640px) 280px, 31vw"
             alt={storyPhotos[1]!.alt}
             style={{ objectPosition: storyPhotos[1]!.position }}
-            loading="lazy"
             className="absolute bottom-0 right-0 h-[58%] w-[62%] rotate-3 rounded-lg border-4 border-cream object-cover shadow-2xl transition duration-700 hover:rotate-0 hover:scale-105"
           />
         </Reveal>
@@ -229,7 +228,7 @@ function Home() {
           {shortcuts.map((s, k) => (
             <Reveal key={s.to} delay={k * 100}>
               <Link to={s.to} className="group relative block aspect-[4/5] overflow-hidden rounded-lg shadow-lg">
-                <img {...responsive(s.image.src, "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 25vw")} alt="" loading="lazy" decoding="async" className="img-zoom absolute inset-0 h-full w-full object-cover" />
+                <LazyPhoto src={s.image.src} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 25vw" alt="" className="img-zoom absolute inset-0 h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent transition-colors duration-500 group-hover:from-terracotta/90" />
                 <div className="absolute inset-x-0 bottom-0 p-4 text-navy-foreground">
                   <s.icon className="h-6 w-6 text-gold transition-transform duration-500 group-hover:-translate-y-1" aria-hidden />

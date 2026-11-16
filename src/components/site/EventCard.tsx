@@ -1,7 +1,7 @@
 import { Clock, Lock, MapPin, Navigation } from "lucide-react";
 import { mapsEmbed, mapsLink, type WeddingEvent } from "@/content/wedding";
 import { PendingNote } from "./Ornaments";
-import { responsive } from "@/lib/images";
+import { LazyPhoto } from "@/components/site/LazyPhoto";
 
 export function MapButton({ e, className = "" }: { e: WeddingEvent; className?: string }) {
   return (
@@ -20,7 +20,7 @@ export function EventCard({ e, showMap = false }: { e: WeddingEvent; showMap?: b
   return (
     <article className="card-elegant group flex h-full flex-col overflow-hidden transition duration-500 hover:-translate-y-1.5 hover:shadow-2xl">
       <div className="relative aspect-[2/1] overflow-hidden sm:aspect-[16/10]">
-        <img {...responsive(e.image.src, "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 37vw")} alt={e.image.alt} loading="lazy" decoding="async" className="img-zoom h-full w-full object-cover" />
+        <LazyPhoto src={e.image.src} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 37vw" alt={e.image.alt} className="img-zoom h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/10 to-transparent" />
         <p className="absolute bottom-3 left-4 flex items-center gap-1.5 rounded-full bg-cream/95 px-3 py-1 text-sm font-semibold text-navy shadow">
           <Clock className="h-3.5 w-3.5 text-terracotta" aria-hidden />
@@ -86,7 +86,7 @@ export function VenueCard({ e, reverse = false }: { e: WeddingEvent; reverse?: b
   return (
     <article className="card-elegant overflow-hidden lg:grid lg:grid-cols-2">
       <div className={`group relative min-h-64 overflow-hidden ${reverse ? "lg:order-2" : ""}`}>
-        <img {...responsive(e.image.src, "(min-width: 1024px) 50vw, (min-width: 640px) 100vw, 37vw")} alt={e.image.alt} loading="lazy" decoding="async" className="img-zoom absolute inset-0 h-full w-full object-cover" />
+        <LazyPhoto src={e.image.src} sizes="(min-width: 1024px) 50vw, (min-width: 640px) 100vw, 37vw" alt={e.image.alt} className="img-zoom absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
         <div className="absolute bottom-0 p-6 text-navy-foreground">
           <p className="text-xs uppercase tracking-[0.25em] text-gold">

@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/site/Ornaments";
 import { PhotoCarousel } from "@/components/site/PhotoCarousel";
 import { Reveal } from "@/components/site/Reveal";
 import { gallery, pagePhotos } from "@/content/wedding";
-import { responsive } from "@/lib/images";
+import { LazyPhoto } from "@/components/site/LazyPhoto";
 
 export const Route = createFileRoute("/galerie")({
   head: () => ({
@@ -40,7 +40,7 @@ function Gallery() {
             {gallery.map((p, k) => (
               <Reveal key={p.src + k} delay={(k % 3) * 120} className="mb-4 break-inside-avoid">
                 <button onClick={() => setI(k)} className="group relative block w-full overflow-hidden rounded-lg shadow-lg">
-                  <img {...responsive(p.src, "(min-width: 640px) 33vw, 25vw")} alt={p.alt} loading="lazy" decoding="async" className="img-zoom w-full" />
+                  <LazyPhoto src={p.src} sizes="(min-width: 640px) 33vw, 25vw" alt={p.alt} className="img-zoom w-full" />
                   <span className="absolute inset-0 flex items-end justify-end bg-gradient-to-t from-navy/80 via-transparent to-transparent p-4 text-navy-foreground opacity-0 transition duration-500 group-hover:opacity-100">
                     <Expand className="h-5 w-5 shrink-0 text-gold" aria-hidden />
                   </span>
