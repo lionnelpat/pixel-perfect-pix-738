@@ -37,6 +37,9 @@ export default defineConfig({
   // Téléphones dont le navigateur n'est plus mis à jour : couleurs et syntaxe converties pour eux.
   css: { transformer: "lightningcss", lightningcss: { targets: browserslistToTargets(OLD_PHONES) } },
   build: { target: ["chrome80", "safari13"], cssTarget: ["chrome80", "safari13"] },
+  // Pré-génération des pages : le serveur temporaire du build écoute en IPv4. Dans un conteneur Docker,
+  // « localhost » peut désigner l'IPv6 côté serveur et l'IPv4 côté requêtes (connexion refusée).
+  preview: { host: "127.0.0.1" },
   resolve: {
     alias: { "@": `${process.cwd()}/src` },
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime", "@tanstack/react-query", "@tanstack/query-core"],
