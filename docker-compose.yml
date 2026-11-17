@@ -1,0 +1,11 @@
+# Déploiement sur le VPS avec Dokploy (type « Compose », branche develop).
+# Le nom de domaine et le HTTPS se règlent dans Dokploy (onglet Domains) : service « web », port 80.
+services:
+  web:
+    build:
+      context: .
+      args:
+        SITE_URL: ${SITE_URL:-https://thibaut-sylviane.life}
+    restart: unless-stopped
+    expose:
+      - "80"
