@@ -3,7 +3,7 @@
 Tout le contenu se modifie dans `src/content/wedding.ts`.
 
 ## Contradictions
-1. **Horaires du 21/11** — Faire-part : union civile 09h00, bénédiction 13h00. Entretien du 14/10 : 10h et 14h. **Le site affiche les horaires du faire-part**, marqués « à confirmer ».
+1. **Horaires du 21/11** — Faire-part : union civile 09h00, bénédiction 13h00. Entretien du 14/10 : 10h et 14h. **Le site affiche les horaires du faire-part**, validés par les mariés le 17/11 (mention « à confirmer » retirée).
 2. **Lieu de la dot** — Faire-part : « Njincha par Foumbot ». Entretien : « Mangoum / Njincha ». Le site suit le faire-part.
 3. **Nom du marié** — Faire-part : NJUPTAVOUI ; entretien : Njutapvoui. Non affiché sur le site (prénoms seuls).
 4. **Date principale** — 14/10 : 21/11 ; 15/10 : 20/11. Le compte à rebours vise le 20/11 à 15h (début de la dot).
