@@ -1,4 +1,4 @@
-# Décisions à valider — Mariage Thibaut & Sylviane
+# Décisions à valider — Mariage Sylviane & Thibaut
 
 Tout le contenu se modifie dans `src/content/wedding.ts`.
 

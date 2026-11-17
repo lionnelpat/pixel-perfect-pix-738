@@ -7,7 +7,7 @@ import { events } from "@/content/wedding";
 export const Route = createFileRoute("/lieux")({
   head: () => ({
     meta: [
-      { title: "Lieux & itinéraires — Thibaut & Sylviane" },
+      { title: "Lieux & itinéraires — Sylviane & Thibaut" },
       { name: "description", content: "Les lieux des cérémonies à Njincha et Foumban, avec itinéraires Google Maps." },
       { property: "og:title", content: "Lieux & itinéraires" },
       { property: "og:description", content: "Où se déroulent les festivités." },

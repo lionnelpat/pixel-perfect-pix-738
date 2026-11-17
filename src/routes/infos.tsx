@@ -7,7 +7,7 @@ import { events, practical } from "@/content/wedding";
 export const Route = createFileRoute("/infos")({
   head: () => ({
     meta: [
-      { title: "Souhaits des mariés — Thibaut & Sylviane" },
+      { title: "Souhaits des mariés — Sylviane & Thibaut" },
       { name: "description", content: "Respect du timing, hébergement, stationnement et contact pour les invités." },
       { property: "og:title", content: "Souhaits des mariés" },
       { property: "og:description", content: "Tout pour préparer votre venue." },

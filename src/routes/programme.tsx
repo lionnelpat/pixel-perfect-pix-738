@@ -7,7 +7,7 @@ import { events, pagePhotos } from "@/content/wedding";
 export const Route = createFileRoute("/programme")({
   head: () => ({
     meta: [
-      { title: "Programme — Thibaut & Sylviane" },
+      { title: "Programme — Sylviane & Thibaut" },
       { name: "description", content: "Le déroulé des deux journées de mariage, 20 et 21 novembre 2026." },
       { property: "og:title", content: "Programme du mariage" },
       { property: "og:description", content: "Dot, union civile, bénédiction nuptiale et soirée." },

@@ -11,7 +11,7 @@ import { LazyPhoto } from "@/components/site/LazyPhoto";
 export const Route = createFileRoute("/galerie")({
   head: () => ({
     meta: [
-      { title: "Galerie — Thibaut & Sylviane" },
+      { title: "Galerie — Sylviane & Thibaut" },
       { name: "description", content: "Les photos du couple et des célébrations." },
       { property: "og:title", content: "Galerie photo" },
       { property: "og:description", content: "Nos plus beaux souvenirs." },

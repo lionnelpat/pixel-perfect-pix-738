@@ -11,10 +11,10 @@ import { listMessages, postMessage } from "@/lib/guestbook.functions";
 export const Route = createFileRoute("/livre-dor")({
   head: () => ({
     meta: [
-      { title: "Livre d’or — Thibaut & Sylviane" },
+      { title: "Livre d’or — Sylviane & Thibaut" },
       { name: "description", content: "Laissez un message aux mariés." },
       { property: "og:title", content: "Livre d’or" },
-      { property: "og:description", content: "Un mot doux pour Thibaut & Sylviane." },
+      { property: "og:description", content: "Un mot doux pour Sylviane & Thibaut." },
     ],
   }),
   loader: () => listMessages(),

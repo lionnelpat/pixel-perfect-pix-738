@@ -7,8 +7,8 @@ import { pagePhotos, practical, registry, storeMapsLink } from "@/content/weddin
 export const Route = createFileRoute("/liste")({
   head: () => ({
     meta: [
-      { title: "Liste de mariage — Thibaut & Sylviane" },
-      { name: "description", content: "La liste de mariage de Thibaut & Sylviane." },
+      { title: "Liste de mariage — Sylviane & Thibaut" },
+      { name: "description", content: "La liste de mariage de Sylviane & Thibaut." },
       { property: "og:title", content: "Liste de mariage" },
       { property: "og:description", content: "Pour celles et ceux qui souhaitent nous gâter." },
     ],
@@ -29,8 +29,25 @@ function Registry() {
           <Divider className="mt-4" />
         </Reveal>
 
-        <Reveal className="text-center">
-          <p className="text-xs uppercase tracking-[0.4em] text-terracotta">Première possibilité</p>
+        <Reveal>
+          <section className="relative overflow-hidden rounded-xl bg-navy px-8 py-12 text-center text-navy-foreground shadow-2xl sm:px-14">
+            <Ticket className="mx-auto h-9 w-9 text-gold" aria-hidden />
+            <p className="mt-3 text-xs uppercase tracking-[0.4em] text-gold">Première possibilité</p>
+            <h2 className="font-script text-gold-shimmer mt-2 text-5xl">{registry.voucher.title}</h2>
+            <p className="mt-4 font-serif text-xl italic text-navy-foreground/90">{registry.voucher.text}</p>
+            <ol className="mx-auto mt-8 grid max-w-3xl gap-6 text-left sm:grid-cols-3">
+              {registry.voucher.steps.map((step, k) => (
+                <li key={step} className="flex items-start gap-3 sm:flex-col sm:items-center sm:text-center">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold font-serif text-xl text-gold">{k + 1}</span>
+                  <span className="text-sm leading-relaxed text-navy-foreground/85">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+        </Reveal>
+
+        <Reveal className="mt-16 text-center">
+          <p className="text-xs uppercase tracking-[0.4em] text-terracotta">Deuxième possibilité</p>
           <h2 className="font-script mt-2 text-5xl text-navy sm:text-6xl">{registry.storesTitle}</h2>
           <p className="mt-3 text-lg text-muted-foreground">{registry.storesText}</p>
         </Reveal>
@@ -106,23 +123,6 @@ function Registry() {
             </section>
           </Reveal>
         )}
-
-        <Reveal className="mt-16">
-          <section className="relative overflow-hidden rounded-xl bg-navy px-8 py-12 text-center text-navy-foreground shadow-2xl sm:px-14">
-            <Ticket className="mx-auto h-9 w-9 text-gold" aria-hidden />
-            <p className="mt-3 text-xs uppercase tracking-[0.4em] text-gold">Deuxième possibilité</p>
-            <h2 className="font-script text-gold-shimmer mt-2 text-5xl">{registry.voucher.title}</h2>
-            <p className="mt-4 font-serif text-xl italic text-navy-foreground/90">{registry.voucher.text}</p>
-            <ol className="mx-auto mt-8 grid max-w-3xl gap-6 text-left sm:grid-cols-3">
-              {registry.voucher.steps.map((step, k) => (
-                <li key={step} className="flex items-start gap-3 sm:flex-col sm:items-center sm:text-center">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold font-serif text-xl text-gold">{k + 1}</span>
-                  <span className="text-sm leading-relaxed text-navy-foreground/85">{step}</span>
-                </li>
-              ))}
-            </ol>
-          </section>
-        </Reveal>
       </div>
     </>
   );

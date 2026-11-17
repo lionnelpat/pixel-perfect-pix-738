@@ -14,7 +14,7 @@ export type Photo = {
 };
 
 export const couple = {
-  display: { first: "Thibaut", second: "Sylviane" },
+  display: { first: "Sylviane", second: "Thibaut" },
   bride: "Sylviane Flore",
   groom: "Gilles Thibaut",
 };
@@ -30,12 +30,12 @@ export const credit = { label: "Model Technologie", url: "https://model-technolo
 
 /** Référencement : seule la page d'accueil est indexée par les moteurs de recherche. */
 export const seo = {
-  title: "Mariage de Thibaut & Sylviane — 20 & 21 novembre 2026 · Foumban",
+  title: "Mariage de Sylviane & Thibaut — 20 & 21 novembre 2026 · Foumban",
   description:
-    "Thibaut & Sylviane se marient les 20 et 21 novembre 2026 à Foumban, au Cameroun. Le site des invités : programme, lieux, dress code, liste de mariage et livre d’or.",
+    "Sylviane & Thibaut se marient les 20 et 21 novembre 2026 à Foumban, au Cameroun. Le site des invités : programme, lieux, dress code, liste de mariage et livre d’or.",
   /** Aperçu affiché quand le lien est partagé (WhatsApp, Facebook…), 1200 × 630, dans public/. */
   shareImage: "/photos/partage.jpg",
-  shareImageAlt: "Thibaut & Sylviane",
+  shareImageAlt: "Sylviane & Thibaut",
   city: "Foumban",
   country: "CM",
 };
@@ -145,10 +145,10 @@ export const practical = {
   accommodation: [{ name: "Complexe NJI Panka", note: "Hébergement suggéré", aConfirmer: true }],
   parking: { text: "Parking disponible sur place (complexe NJI Panka).", aConfirmer: true },
   children: "Les enfants sont les bienvenus à certains événements seulement — précisions à venir.",
-  /** Personnes à contacter, dans l'ordre voulu par les mariés (2026-11-06). */
+  /** Personnes à contacter. La mariée est toujours nommée avant le marié (2026-11-17). */
   contacts: [
-    { name: "Gilles Thibaut NJUTAPVOUI", phone: "+237 698 92 32 18" },
     { name: "Sylviane MFAGAM", phone: "+237 698 46 75 28" },
+    { name: "Gilles Thibaut NJUTAPVOUI", phone: "+237 698 92 32 18" },
     { name: "Gaelle Natacha MAGNEROU", phone: "+237 694 91 45 41" },
   ] as { name: string; phone: string }[],
 };
@@ -175,7 +175,7 @@ export function storeMapsLink(s: GiftStore) {
 export const registry = {
   intro: "Votre présence est le plus précieux des cadeaux. Pour celles et ceux qui souhaitent nous gâter, deux possibilités s’offrent à vous.",
   storesTitle: "Nos lieux de cadeaux",
-  storesText: "Retrouvez notre liste dans l’une de ces deux enseignes, à Douala ou à Yaoundé.",
+  storesText: "Rendez-vous dans l’une de ces deux enseignes, à Douala ou à Yaoundé, pour y régler un article de notre liste.",
   contactText: "Pour toute question sur la liste de mariage ou les cadeaux, contactez :",
   /** Les 2 enseignes choisies par les mariés. Téléphones : non publiés tant que non vérifiés (voir docs/DECISIONS_A_VALIDER.md). */
   stores: [
@@ -189,8 +189,8 @@ export const registry = {
   ] as GiftStore[],
   voucher: {
     title: "Le bon cadeau",
-    text: "Vous préférez nous laisser choisir ? Offrez-nous un bon cadeau.",
-    steps: ["Rendez-vous dans l’enseigne de votre choix.", "Faites établir un bon cadeau du montant qui vous convient.", "Remettez-le aux mariés."],
+    text: "Laissez-nous choisir : offrez-nous un bon cadeau.",
+    steps: ["Rendez-vous dans l’une de nos deux enseignes (voir ci-dessous).", "Faites établir un bon cadeau du montant qui vous convient.", "Remettez-le aux mariés."],
   },
 };
 
@@ -216,17 +216,17 @@ export function mapsEmbed(e: WeddingEvent) {
  * pour téléphone, fichier renommé en .jpg), la déclarer ici, puis l'ajouter à `gallery`.
  */
 const photos = {
-  blanc: { src: "/photos/accueil-2.jpg", alt: "Thibaut et Sylviane, tout de blanc vêtus", position: "50% 20%" },
+  blanc: { src: "/photos/accueil-2.jpg", alt: "Sylviane et Thibaut, tout de blanc vêtus", position: "50% 20%" },
   bordeaux: { src: "/photos/accueil-1.jpg", alt: "Sylviane en robe bordeaux, Thibaut en costume bleu", position: "50% 15%" },
-  pagneArche: { src: "/photos/couple-pagne-arche.jpg", alt: "Thibaut et Sylviane enlacés, en pagne, sous une arche fleurie", position: "50% 18%" },
-  pagneFleurs: { src: "/photos/couple-pagne-fleurs.jpg", alt: "Thibaut et Sylviane en pagne, devant un décor de fleurs blanches", position: "50% 18%" },
+  pagneArche: { src: "/photos/couple-pagne-arche.jpg", alt: "Sylviane et Thibaut enlacés, en pagne, sous une arche fleurie", position: "50% 18%" },
+  pagneFleurs: { src: "/photos/couple-pagne-fleurs.jpg", alt: "Sylviane et Thibaut en pagne, devant un décor de fleurs blanches", position: "50% 18%" },
   chic: { src: "/photos/couple-chic.jpg", alt: "Sylviane en robe verte au bras de Thibaut", position: "50% 15%" },
   canape: { src: "/photos/couple-canape.jpg", alt: "Sylviane cache les yeux de Thibaut, sur le canapé", position: "50% 25%" },
   alliances: { src: "/photos/souvenir-alliances.jpg", alt: "Montage souvenir : le couple sur le canapé et les alliances", position: "50% 30%" },
   thibaut: { src: "/photos/thibaut-costume.jpg", alt: "Thibaut en costume bleu et gris", position: "50% 15%" },
   sylviane: { src: "/photos/sylviane-robe-rouge.jpg", alt: "Sylviane en robe rouge", position: "50% 15%" },
-  familleSalon: { src: "/photos/famille-salon.jpg", alt: "Thibaut et Sylviane en famille dans le salon", position: "50% 40%" },
-  familleCanape: { src: "/photos/galerie-01.jpg", alt: "Thibaut et Sylviane en famille sur le canapé", position: "50% 25%" },
+  familleSalon: { src: "/photos/famille-salon.jpg", alt: "Sylviane et Thibaut en famille dans le salon", position: "50% 40%" },
+  familleCanape: { src: "/photos/galerie-01.jpg", alt: "Sylviane et Thibaut en famille sur le canapé", position: "50% 25%" },
 } satisfies Record<string, Photo>;
 
 /** Diaporama plein écran de l'accueil : 2 photos seulement, chacune étant téléchargée par tous les visiteurs. */

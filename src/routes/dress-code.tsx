@@ -7,8 +7,8 @@ import { dressCode, pagePhotos } from "@/content/wedding";
 export const Route = createFileRoute("/dress-code")({
   head: () => ({
     meta: [
-      { title: "Dress code — Thibaut & Sylviane" },
-      { name: "description", content: "Couleurs et tenues pour le mariage de Thibaut & Sylviane." },
+      { title: "Dress code — Sylviane & Thibaut" },
+      { name: "description", content: "Couleurs et tenues pour le mariage de Sylviane & Thibaut." },
       { property: "og:title", content: "Dress code" },
       { property: "og:description", content: "Bleu nuit, terracotta et crème." },
     ],

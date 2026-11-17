@@ -1,6 +1,6 @@
-# Thibaut & Sylviane — site du mariage
+# Sylviane & Thibaut — site du mariage
 
-Site privé (protégé par mot de passe) du mariage de Thibaut & Sylviane, 20 & 21 novembre 2026 à Foumban.
+Site privé (protégé par mot de passe) du mariage de Sylviane & Thibaut, 20 & 21 novembre 2026 à Foumban.
 
 Réalisé par [Model Technologie](https://model-technologie.com).
 

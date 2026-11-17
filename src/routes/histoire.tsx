@@ -8,9 +8,9 @@ import { LazyPhoto } from "@/components/site/LazyPhoto";
 export const Route = createFileRoute("/histoire")({
   head: () => ({
     meta: [
-      { title: "Notre histoire — Thibaut & Sylviane" },
-      { name: "description", content: "Le récit de la rencontre de Thibaut et Sylviane." },
-      { property: "og:title", content: "Notre histoire — Thibaut & Sylviane" },
+      { title: "Notre histoire — Sylviane & Thibaut" },
+      { name: "description", content: "Le récit de la rencontre de Sylviane et Thibaut." },
+      { property: "og:title", content: "Notre histoire — Sylviane & Thibaut" },
       { property: "og:description", content: "Tout a commencé le 18 octobre 2022, à Yaoundé." },
     ],
   }),
